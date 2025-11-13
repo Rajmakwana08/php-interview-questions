@@ -2028,53 +2028,785 @@ It is recommended to always use MySQLi (or PDO) for PHP database connections tod
       codeExample: ``
     },  
     {
-      id: 1,
-      question: "",
+      id: 1.1,
+      question: "1. HTML Page Design your Profile page with following details: - Personal Details - Educational Details - Profile Picture - Link of your workspace directory",
       answer: "",
-      codeExample: ``
+      codeExample: `
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Profile Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f2f2f2;
+        }
+        .container {
+            width: 60%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        img {
+            display: block;
+            margin: 10px auto;
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        table, th, td {
+            border: 1px solid gray;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+            text-decoration: none;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>My Profile</h1>
+
+    <!-- Profile Picture -->
+    <img src="profile.jpg" alt="My Profile Picture">
+
+    <!-- Personal Details -->
+    <h2>Personal Details</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <td>Raj Makwana</td>
+        </tr>
+        <tr>
+            <th>Date of Birth</th>
+            <td>01-Jan-2002</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>raj@example.com</td>
+        </tr>
+        <tr>
+            <th>Mobile</th>
+            <td>+91 9876543210</td>
+        </tr>
+    </table>
+
+    <!-- Educational Details -->
+    <h2>Educational Details</h2>
+    <table>
+        <tr>
+            <th>Course</th>
+            <th>Institute</th>
+            <th>Year</th>
+            <th>Result</th>
+        </tr>
+        <tr>
+            <td>BCA</td>
+            <td>XYZ College</td>
+            <td>2023</td>
+            <td>First Class</td>
+        </tr>
+        <tr>
+            <td>MCA</td>
+            <td>Parul University</td>
+            <td>2025</td>
+            <td>Pursuing</td>
+        </tr>
+    </table>
+
+    <!-- Workspace Directory -->
+    <a href="http://localhost/workspace/" target="_blank">My Workspace Directory</a>
+</div>
+
+</body>
+</html>
+
+      
+      
+      `
     },  
     {
-      id: 1,
-      question: "",
+      id: 2.2,
+      question: "2. Web Page design with CSS Create a general stylesheet to apply on your developed webpages. [ Use CSS class, CSS Groups and CSS tags ]",
       answer: "",
-      codeExample: ``
+      codeExample: `
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web Page with General Stylesheet</title>
+    <style>
+        /* CSS Tag Selector */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: darkblue;
+        }
+
+        p {
+            font-size: 16px;
+            color: #333;
+        }
+
+        /* CSS Class Selector */
+        .box {
+            border: 2px solid gray;
+            background: white;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 5px gray;
+        }
+
+        .highlight {
+            color: red;
+            font-weight: bold;
+        }
+
+        /* CSS Group Selector */
+        h2, h3, h4 {
+            color: darkgreen;
+            font-family: Verdana, sans-serif;
+        }
+
+        /* CSS ID Selector (optional for uniqueness) */
+        #footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Welcome to My Web Page</h1>
+
+    <div class="box">
+        <h2>About Me</h2>
+        <p>Hello, my name is <span class="highlight">Raj Makwana</span>. I am pursuing MCA at Parul University.</p>
+    </div>
+
+    <div class="box">
+        <h3>My Skills</h3>
+        <ul>
+            <li>Web Development</li>
+            <li>Database Management</li>
+            <li>Programming in C, C++, PHP</li>
+        </ul>
+    </div>
+
+    <div class="box">
+        <h4>Contact</h4>
+        <p>Email: raj@example.com</p>
+        <p>Phone: +91 9876543210</p>
+    </div>
+
+    <div id="footer">
+        © 2025 My Profile Page
+    </div>
+
+</body>
+</html>
+
+      
+      `
     },  
     {
-      id: 1,
-      question: "",
+      id: 3.3,
+      question: "3. Registration Form Web Develop an online Admission Registration page.",
       answer: "",
-      codeExample: ``
+      codeExample: `
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admission Registration</title>
+</head>
+<body>
+    <h1>Admission Registration Form</h1>
+    <form method="post">
+        <label>Name:</label>
+        <input type="text" name="name" required><br><br>
+
+        <label>Email:</label>
+        <input type="email" name="email" required><br><br>
+
+        <label>Phone:</label>
+        <input type="text" name="phone" required><br><br>
+
+        <label>Course:</label>
+        <select name="course">
+            <option>BCA</option>
+            <option>B.Sc IT</option>
+            <option>B.Tech</option>
+            <option>MCA</option>
+        </select><br><br>
+
+        <input type="submit" value="Register">
+    </form>
+    
+</body>
+</html>
+<?php
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    echo "<h1>Registration Successful</h1>";
+    echo "Name: " . $_POST['name'] . "<br>";
+    echo "Email: " . $_POST['email'] . "<br>";
+    echo "Phone: " . $_POST['phone'] . "<br>";
+    echo "Course: " . $_POST['course'] . "<br>";
+}
+?>
+      
+      `
     },  
     {
-      id: 1,
-      question: "",
+      id: 4.4,
+      question: "4. Type Conversion through Script Write a script to perform all possible type casting and conversion operations in PHP. Design output page in following format. Variable Name Variable Type Converted Type Converted Value",
       answer: "",
-      codeExample: ``
+      codeExample: `
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Type Conversion in PHP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            margin: 20px;
+        }
+        table {
+            width: 80%;
+            margin: auto;
+            border-collapse: collapse;
+            background: white;
+        }
+        th, td {
+            border: 1px solid gray;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background: darkblue;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<h2 align="center">Type Conversion in PHP</h2>
+
+<?php
+// Define variables
+$intVar = 100;       // Integer
+$floatVar = 45.67;   // Float
+$strVar = "123";     // String
+$boolVar = true;     // Boolean
+
+// Array to store test cases
+$variables = [
+    "intVar"   => $intVar,
+    "floatVar" => $floatVar,
+    "strVar"   => $strVar,
+    "boolVar"  => $boolVar
+];
+
+// Function to display conversions
+function displayConversion($name, $value, $convertedType, $convertedValue) {
+    echo "<tr>
+            <td>$name</td>
+            <td>" . gettype($value) . "</td>
+            <td>$convertedType</td>
+            <td>$convertedValue</td>
+          </tr>";
+}
+
+echo "<table>";
+echo "<tr>
+        <th>Variable Name</th>
+        <th>Variable Type</th>
+        <th>Converted Type</th>
+        <th>Converted Value</th>
+    </tr>";
+
+// Conversion examples
+foreach ($variables as $name => $value) {
+    // Convert to Integer
+    displayConversion($name, $value, "Integer", (int)$value);
+
+    // Convert to Float
+    displayConversion($name, $value, "Float", (float)$value);
+
+    // Convert to String
+    displayConversion($name, $value, "String", (string)$value);
+
+    // Convert to Boolean
+    displayConversion($name, $value, "Boolean", (bool)$value);
+}
+
+echo "</table>";
+?>
+
+</body>
+</html>
+
+      
+      
+      `
     },  
     {
-      id: 1,
-      question: "",
+      id: 5.5,
+      question: "5. Login and SignUp Page Display Login and SignUp page and redirect to Profile or Registration page accordingly.",
       answer: "",
-      codeExample: ``
+      codeExample: `
+signup.php
+
+
+<?php
+$conn = mysqli_connect("localhost", "root", "", "student_db");
+
+if(isset($_POST['signup'])){
+    $user = $_POST['username'];
+    $pass = $_POST['password'];
+    $insert = "INSERT INTO users(username,password) VALUES('$user','$pass')";
+    mysqli_query($conn, $insert);
+    echo "you acoount has been created";
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signup Page</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+            text-align: center;
+            padding-top: 80px;
+        }
+        form {
+            background: white;
+            width: 300px;
+            margin: auto;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+        }
+        input {
+            width: 90%;
+            padding: 8px;
+            margin: 8px;
+        }
+        input[type=submit] {
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .msg {
+            margin-top: 20px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <form method="POST">
+        <h2>Sign Up</h2>
+        <input type="text" name="username" placeholder="Enter Username" required><br>
+        <input type="password" name="password" placeholder="Enter Password" required><br>
+        <input type="submit" name="signup" value="Register">
+        <div class='msg'>You have account than <a href='login.php'>Login Here</a></div>
+    </form>
+    
+</body>
+</html>
+
+
+<!-- 
+CREATE DATABASE student_db;
+USE student_db;
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50),
+    password VARCHAR(255)
+); 
+-->
+
+
+----------------------------------------------------------------------
+
+
+login.php
+
+<?php
+session_start();
+$conn = mysqli_connect("localhost", "root", "", "student_db");
+
+if(isset($_POST['login'])){
+    $user = $_POST['username'];
+    $pass = $_POST['password'];
+    $check = "SELECT * FROM users WHERE username='$user' AND password='$pass'";
+    $result = mysqli_query($conn, $check);
+
+    if(mysqli_num_rows($result) > 0){
+        $_SESSION['username'] = $user;
+        header("Location: profile.php");
+    } else {
+        echo "<div class='msg'>Invalid Login!</div>";
+    }
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(135deg, #f6d365, #fda085);
+            text-align: center;
+            padding-top: 80px;
+        }
+        form {
+            background: white;
+            width: 300px;
+            margin: auto;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+        }
+        input {
+            width: 90%;
+            padding: 8px;
+            margin: 8px;
+        }
+        input[type=submit] {
+            background: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .msg {
+            margin-top: 20px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <form method="POST">
+        <h2>Login</h2>
+        <input type="text" name="username" placeholder="Enter Username" required><br>
+        <input type="password" name="password" placeholder="Enter Password" required><br>
+        <input type="submit" name="login" value="Login">
+        <p>Don’t have an account? <a href="signup.php">Sign Up</a></p>
+    </form>
+</body>
+</html>
+
+
+----------------------------------------------------------------------
+
+
+login.php
+
+<?php
+session_start();
+session_destroy();
+header("Location: login.php");
+?>
+
+
+----------------------------------------------------------------------
+
+
+profile.php
+
+<?php
+session_start();
+if(!isset($_SESSION['username'])){
+    header("Location: login.php");
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile Page</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #89f7fe, #66a6ff);
+            text-align: center;
+            padding-top: 100px;
+            font-family: Arial;
+        }
+        .box {
+            background: white;
+            width: 350px;
+            margin: auto;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+        }
+        a {
+            text-decoration: none;
+            color: white;
+            background: #dc3545;
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>Welcome, <?php echo $_SESSION['username']; ?> 🎉</h2>
+        <p>You are successfully logged in.</p>
+        <a href="logout.php">Logout</a>
+    </div>
+</body>
+</html>
+
+
+      
+      
+      `
     },  
     {
-      id: 1,
-      question: "",
+      id: 6.6,
+      question: "6. Student Result Generation System Develop a Student Result Generation System. Provide following facilities: - Students Exam Detail Entry - Marks entry - Result Generation - Marksheet and Result Analysis",
       answer: "",
-      codeExample: ``
+      codeExample: `
+student_entry.php
+
+
+<?php
+$conn = mysqli_connect("localhost", "root", "", "student_result");
+
+if(isset($_POST['save'])){
+    $name = $_POST['name'];
+    $roll = $_POST['roll'];
+    $s1 = $_POST['s1'];
+    $s2 = $_POST['s2'];
+    $s3 = $_POST['s3'];
+
+    mysqli_query($conn, "INSERT INTO students(name, roll_no, subject1, subject2, subject3)
+                         VALUES('$name','$roll','$s1','$s2','$s3')");
+    echo "<p style='color:green;'>Record Saved!</p>";
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Student Entry</title>
+<style>
+body{
+  font-family:Arial;
+  background:#f2f2f2;
+  text-align:center;
+}
+form{
+  background:white;
+  width:320px;
+  margin:auto;
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 0 10px gray;
+}
+input{
+  margin:5px;
+  padding:8px;
+  width:90%;
+}
+input[type=submit]{
+  background:#007bff;
+  color:white;
+  border:none;
+  cursor:pointer;
+}
+</style>
+</head>
+<body>
+<h2>Student Detail Entry</h2>
+  <form method="POST">
+    <input type="text" name="name" placeholder="Name" required><br>
+    <input type="text" name="roll" placeholder="Roll No" required><br>
+    <input type="number" name="s1" placeholder="Subject 1 Marks" required><br>
+    <input type="number" name="s2" placeholder="Subject 2 Marks" required><br>
+    <input type="number" name="s3" placeholder="Subject 3 Marks" required><br>
+    <input type="submit" name="save" value="Save">
+  </form>
+</body>
+</html>
+
+<!-- 
+CREATE DATABASE student_result;
+
+USE student_result;
+
+CREATE TABLE students (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50),
+    roll_no VARCHAR(20),
+    subject1 INT,
+    subject2 INT,
+    subject3 INT
+); 
+-->
+
+
+
+----------------------------------------------------------------------
+
+
+maksheet.php
+
+<?php
+$conn = mysqli_connect("localhost", "root", "", "student_result");
+
+if(isset($_POST['search'])){
+    $roll = $_POST['roll'];
+    $res = mysqli_query($conn, "SELECT * FROM students WHERE roll_no='$roll'");
+    $row = mysqli_fetch_assoc($res);
+
+    if($row){
+        $total = $row['subject1'] + $row['subject2'] + $row['subject3'];
+        $avg = $total / 3;
+        $result = ($avg >= 35) ? "Pass" : "Fail";
+    } else {
+        echo "<p style='color:red;'>No Record Found!</p>";
+    }
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Marksheet</title>
+<style>
+body{
+    font-family:Arial;
+    text-align:center;
+    background:#e3f2fd;
+}
+table{
+    margin:auto;
+    border-collapse:collapse;
+    width:60%;
+}
+th,td{
+    border:1px solid gray;
+    padding:8px;
+}
+th{
+    background:#007bff;
+    color:white;
+}
+</style>
+</head>
+<body>
+<h2>Student Marksheet</h2>
+    <form method="POST">
+        <input type="text" name="roll" placeholder="Enter Roll No" required>
+        <input type="submit" name="search" value="View Result">
+    </form>
+<?php if(isset($row)){ ?>
+    <table>
+        <tr><th>Name</th><td><?= $row['name'] ?></td></tr>
+        <tr><th>Roll No</th><td><?= $row['roll_no'] ?></td></tr>
+        <tr><th>Subject 1</th><td><?= $row['subject1'] ?></td></tr>
+        <tr><th>Subject 2</th><td><?= $row['subject2'] ?></td></tr>
+        <tr><th>Subject 3</th><td><?= $row['subject3'] ?></td></tr>
+        <tr><th>Total</th><td><?= $total ?></td></tr>
+        <tr><th>Average</th><td><?= $avg ?></td></tr>
+        <tr><th>Result</th><td style="color:<?= $result=='Pass'?'green':'red' ?>;"><?= $result ?></td></tr>
+    </table>
+<?php } ?>
+</body>
+</html>
+
+      
+      
+      `
     },  
     {
-      id: 1,
-      question: "",
+      id: 7.7,
+      question: "7. Server-side Validations using regular Expression Design online placement registration form. Check for the validity of entered fields using regular expressions.",
       answer: "",
-      codeExample: ``
+      codeExample: `
+<?php
+if(isset($_POST['submit'])){
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $mobile = $_POST['mobile'];
+
+    // Regular Expressions
+    $namePattern = "/^[A-Za-z ]+$/";
+    $emailPattern = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$/";
+    $mobilePattern = "/^[0-9]{10}$/";
+
+    if(!preg_match($namePattern, $name))
+        echo "Invalid Name!<br>";
+    elseif(!preg_match($emailPattern, $email))
+        echo "Invalid Email!<br>";
+    elseif(!preg_match($mobilePattern, $mobile))
+        echo "Invalid Mobile Number!<br>";
+    else
+        echo "✅ Registration Successful!";
+}
+?>
+<form method="POST">
+    <h3>Placement Registration</h3>
+    Name: <input type="text" name="name"><br><br>
+    Email: <input type="text" name="email"><br><br>
+    Mobile: <input type="text" name="mobile"><br><br>
+    <input type="submit" name="submit" value="Register">
+</form>
+
+      
+      
+      `
     },  
 
     {
-      id: 1,
-      question: "",
+      id: 8.8,
+      question: "8. Sending a Mail Develop a php script to send a mail. [ For Example: Forgot password recovery mail.]",
       answer: "",
-      codeExample: ``
+      codeExample: `
+<?php
+ $to = "user@example.com";
+ $subject = "Password Recovery";
+ $message = "Click here to reset your password: https://example.com/reset";
+ $headers = "From: noreply@example.com";
+
+ if(mail($to, $subject, $message, $headers))
+     echo "Mail Sent Successfully!";
+ else
+     echo "Mail Sending Failed!";
+?> 
+      
+      `
     },  
     {
       id: 1,
