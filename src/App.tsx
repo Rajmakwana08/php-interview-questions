@@ -1998,10 +1998,330 @@ It is recommended to always use MySQLi (or PDO) for PHP database connections tod
       codeExample: ``
     },  
     {
-      id: 1,
-      question: "",
+      id: 8888,
+      question: "Mid paper question answers",
       answer: "",
-      codeExample: ``
+      codeExample: `
+      
+✅ Q1 (a) – Short Questions (1 mark each)
+
+1) What is the main difference between open-source and closed-source software?
+
+Open-source software → Source code is publicly available, can be modified.
+Closed-source software → Source code is private; users cannot modify it.
+
+
+2) Who is the creator of PHP?
+
+👉 Rasmus Lerdorf
+
+
+
+3) One difference between MySQL and MySQLi?
+
+MySQL → Older extension, procedural only.
+MySQLi → Improved version, supports procedural + object-oriented and prepared statements.
+
+
+
+
+✅ Q1 (b) – MCQs / True-False / Fill blanks (1 mark each)
+
+1) Best defines open-source philosophy
+👉 b) Software whose source code is publicly available
+
+
+2) Open Source Software allows users to modify source code. (True/False)
+👉 True
+
+
+3) The switch statement is used for?
+
+👉 c) Function call (wrong)
+Correct answer: Branching / decision making
+But from options:
+👉 d) String concatenation = WRONG
+👉 b) Function call = WRONG
+👉 a) Looping = WRONG
+Correct option should be Branching, but not in list.
+So in exam, choose none OR write branching.
+
+
+4) Function to execute SQL query in PHP
+👉 mysqli_query()
+
+
+5) Default MySQL port number
+👉 a) 3306
+
+
+6) Most commonly used open-source database with PHP
+👉 c) MySQL
+
+
+7) Function used to create array
+👉 b) array()
+
+
+---------------------------------------------------------------------------
+
+
+✅ Q2(a) – 2-Mark Questions
+
+1) Write any two advantages of using open-source software in web development.
+
+✔ Free to use
+✔ Easy to modify/customize
+✔ Large community support
+✔ No licensing cost
+✔ Secure due to frequent updates
+
+
+2) Importance of FOSS (Free and Open Source Software)
+
+Promotes collaboration and innovation
+Reduces software cost
+Provides source code access → easy to modify
+No vendor lock-in
+Highly customizable
+
+
+-----------------
+
+
+✅ Q2(b) – 3-Mark Questions
+
+1) PHP program using conditional + loop to display numbers 1 to 10
+
+<?php
+for($i = 1; $i <= 10; $i++){
+    if($i % 2 == 0){
+        echo "$i is Even <br>";
+    } else {
+        echo "$i is Odd <br>";
+    }
+}
+?>
+
+
+
+2) Process of creating and using user-defined functions in PHP
+
+Steps:
+
+1. Use function keyword
+2. Give function name
+3. Write logic
+4. Call the function
+
+Example:
+
+<?php
+function greet($name){
+    echo "Hello, $name!";
+}
+
+greet("Raj");
+?>
+
+
+---------------------------------------------------------------------------
+
+
+✅ Q3 – Attempt ANY TWO (5 marks each)
+
+Q3(i) PHP script demonstrating conditional + loops
+<?php
+for($i = 1; $i <= 15; $i++){
+    if($i % 3 == 0){
+        echo "$i is divisible by 3<br>";
+    } else if($i % 2 == 0){
+        echo "$i is even<br>";
+    } else {
+        echo "$i is odd<br>";
+    }
+}
+?>
+
+
+Explanation:
+
+Loop prints numbers
+Conditions check if number is even, odd, or divisible by 3
+
+
+
+Q3(ii) Variable scope in PHP
+
+✔ 1. Local Scope
+Declared inside function → used inside only.
+
+
+✔ 2. Global Scope
+Declared outside function → cannot be used inside unless declared global.
+
+
+✔ 3. Static Scope
+Variable keeps its value between function calls.
+
+
+✔ 4. Super Global Variables
+$_GET, $_POST, $_SESSION, $_SERVER — available anywhere.
+
+Examples:
+
+<?php
+$globalVar = 10;
+
+function demo(){
+    global $globalVar; // access global var
+    static $count = 0;
+    $count++;
+    echo "Global: $globalVar, Count: $count<br>";
+}
+
+demo();
+demo();
+demo();
+?>
+
+
+
+Q3(iii) Use of associative arrays vs indexed arrays
+
+✔ Indexed Array
+
+Stores data with numeric index
+$arr[0] = "Raj"
+
+
+✔ Associative Array
+
+Stores data with key → value
+$emp["name"] = "Raj"
+
+
+Why associative arrays are better for structured data?
+
+  Easy to understand
+  Keys represent meaning
+  Better for storing records (employee, product, student data)
+
+Example:
+
+$student = [
+  "name" => "Raj",
+  "age" => 21,
+  "course" => "MCA"
+];
+
+
+---------------------------------------------------------------------------
+
+
+✅ Q4(a) Employee bonus program (5 Marks)
+
+⭐ Requirement:
+
+Calculate bonus based on ratings.
+
+Example:
+
+Rating = 5 → 20% bonus
+Rating = 4 → 15% bonus
+Rating = 3 → 10% bonus
+Below 3 → No bonus
+
+⭐ Program using conditions + loops
+
+<?php
+$employees = [
+  ["name" => "Amit", "salary" => 30000, "rating" => 5],
+  ["name" => "Raj", "salary" => 25000, "rating" => 3],
+  ["name" => "Neha", "salary" => 28000, "rating" => 4]
+];
+
+foreach($employees as $emp){
+    if($emp["rating"] == 5)
+        $bonus = $emp["salary"] * 0.20;
+    else if($emp["rating"] == 4)
+        $bonus = $emp["salary"] * 0.15;
+    else if($emp["rating"] == 3)
+        $bonus = $emp["salary"] * 0.10;
+    else
+        $bonus = 0;
+
+    echo $emp["name"] . " bonus: " . $bonus . "<br>";
+}
+?>
+
+
+
+✅ Q4(b) Fetch sales reports using date ranges
+
+✔ MySQL Date Functions Used
+
+DATE() → extract date
+BETWEEN → filter date range
+CURDATE() → today
+NOW() → current timestamp
+
+⭐ PHP + MySQL program
+
+<?php
+$con = mysqli_connect("localhost","root","","shop");
+
+$start = "2025-01-01";
+$end = "2025-01-31";
+
+$query = "SELECT * FROM sales
+          WHERE date BETWEEN '$start' AND '$end'";
+
+$result = mysqli_query($con, $query);
+
+while($row = mysqli_fetch_assoc($result)){
+    echo $row['product'] . " - " . $row['amount'] . "<br>";
+}
+?>
+
+
+
+
+⭐ OR
+
+Q4(b) Connecting to multiple MySQL databases (5 marks)
+
+Program Structure
+
+<?php
+
+$db1 = mysqli_connect("localhost","root","","students_db");
+$db2 = mysqli_connect("localhost","root","","sales_db");
+
+$q1 = mysqli_query($db1, "SELECT * FROM students");
+$q2 = mysqli_query($db2, "SELECT * FROM sales");
+
+echo "Student Data:<br>";
+while($row = mysqli_fetch_assoc($q1)){
+    echo $row['name']."<br>";
+}
+
+echo "Sales Data:<br>";
+while($row = mysqli_fetch_assoc($q2)){
+    echo $row['product']." - ".$row['amount']."<br>";
+}
+
+?>
+
+
+
+✔ Explanation:
+
+Two DB connections
+Two queries
+Fetch data from both DBs for analytics
+      
+      `
     },  
     {
       id: 1,
