@@ -2330,23 +2330,3101 @@ Fetch data from both DBs for analytics
       codeExample: ``
     },  
     {
-      id: 1,
-      question: "",
+      id: 31,
+      question: "31. Difference between GET and POST.",
       answer: "",
-      codeExample: ``
+      codeExample: `
+✅ Difference between GET and POST (Easy Explanation)
+
+| GET                                     | POST                                  |
+| ----------------------------------------| --------------------------------------|
+| Sends data in URL                       | Sends data in request body (hidden)   |
+| Less secure (data visible in URL)       | More secure (data not visible in URL) |
+| Can send small amount of data           | Can send large amount of data         |
+| Used for viewing/fetching data          | Used for submitting/inserting data    |
+| URL becomes long (has query string)     | URL remains clean                     |
+| Can be bookmarked                       | Cannot be bookmarked                  |
+| Example URL: page.php?name=Raj&age=20   | No data shown in URL                  |
+| Faster (cached by browser)              | Slightly slower                       |
+| Good for: search, filters, reading data | Good for: login, forms, payments      |
+
+
+✅ Simple Example
+
+GET Method
+
+<form method="GET" action="welcome.php">
+    Name: <input type="text" name="username">
+    <input type="submit">
+</form>
+
+
+➡ Data will appear in URL like:
+welcome.php?username=Raj
+
+
+
+POST Method
+
+<form method="POST" action="welcome.php">
+    Name: <input type="text" name="username">
+    <input type="submit">
+</form>
+
+
+➡ Data is sent hidden, not shown in URL.
+      
+      `
     },  
+    {
+      id: 32,
+      question: "32. Explain form handling with PHP.",
+      answer: "",
+      codeExample: `
+✅ Form Handling in PHP (Easy Explanation)
+
+Form handling means collecting data from an HTML form and processing it using PHP.
+
+When a user fills a form → clicks submit → data is sent to a PHP script using GET or POST → PHP reads that 
+data → shows output or stores in DB.
+
+
+✅ How Form Handling Works? (Simple Steps)
+
+1. Create an HTML form
+2. Choose method → GET or POST
+3. Set action → PHP file that will receive form data
+4. Use PHP superglobals:
+  $_GET[] → to read GET data
+  $_POST[] → to read POST data
+5. Process or print output
+
+
+✅ Example: HTML Form + PHP Handling
+
+⭐ Step 1: HTML Form (form.html)
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<form action="handle.php" method="POST">
+    Name: <input type="text" name="username"><br><br>
+    Age: <input type="number" name="age"><br><br>
+    <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>
+
+
+
+⭐ Step 2: PHP File to Handle Data (handle.php)
+
+<?php
+$name = $_POST['username'];   // read name from form
+$age  = $_POST['age'];        // read age from form
+
+echo "Your Name is: " . $name . "<br>";
+echo "Your Age is: " . $age;
+?>
+
+
+
+✅ Output
+
+If user enters:
+
+Name: Raj
+Age: 20
+
+
+Then output:
+
+Your Name is: Raj
+Your Age is: 20
+
+
+
+✅ Important PHP Superglobal Variables
+
+| Variable      | Use                              |
+| ------------- | -------------------------------- |
+| $_GET[]       | Read form data sent through GET  |
+| $_POST[]      | Read form data sent through POST |
+| $_REQUEST[]   | Reads both GET + POST data       |
+
+
+
+✅ Why POST is preferred for form handling?
+
+More secure
+Does not show data in URL
+Can send large data
+Used for login, registration, payments
+      
+      `
+    },  
+    {
+      id: 33,
+      question: "33. What is sanitization & validation?",
+      answer: "",
+      codeExample: `
+✅ What is Validation? (Simple Meaning)
+
+Validation means checking whether the user’s input is correct, complete, and acceptable.
+
+✔️ Validation = Is the data valid?
+✔️ Ensures rules are followed.
+
+
+✅ Examples of Validation
+
+Email format must be correct
+✔ test@example.com
+✘ test@.com
+
+
+Age must be a number
+✔ 25
+✘ abc
+
+
+Password must be at least 8 characters
+
+✔ mypassword123
+✘ 1234
+
+
+⭐ PHP Validation Example
+
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    echo "Invalid email!";
+}
+
+
+
+
+✅ What is Sanitization? (Simple Meaning)
+
+Sanitization means cleaning the input to remove harmful or unwanted characters.
+
+✔️ Sanitization = Make the data safe.
+✔️ Removes special characters that may cause hacking (XSS, SQL injection).
+
+✅ Examples of Sanitization
+
+Remove HTML tags
+Input: <script>alert(1)</script>
+Output: alert(1)
+
+Remove extra spaces
+Input: " John "
+Output: "John"
+
+Escape harmful symbols
+Input: O'Reilly
+Output: O\'Reilly
+
+
+⭐ PHP Sanitization Example
+
+$name = filter_var($name, FILTER_SANITIZE_STRING);
+
+
+🔍 Difference Between Validation & Sanitization (Easy)
+
+| Validation                                        | Sanitization                                                 |
+| ------------------------------------------------- | ------------------------------------------------------------ |
+| Checks if the data is correct or not              | Cleans the data to make it safe                              |
+| Rejects wrong or invalid data                     | Allows data but removes harmful parts                        |
+| Ensures data follows rules (format, length, type) | Removes extra spaces, tags, or symbols                       |
+| Example: "Is this email format correct?"          | Example: "Remove HTML tags from input"                       |
+| Stops form submission if rules fail               | Does not stop submission; just cleans input                  |
+| Used for checking correctness                     | Used for security and cleanliness                            |
+| Ensures data is meaningful                        | Ensures data cannot be used for hacking (XSS, SQL Injection) |
+| Example: Age must be a number                     | Example: Convert "  John " → "John"                          |
+| Example: Password must be 8+ chars                | Example: Remove <script> tags                                |
+| Helps maintain data quality                       | Helps protect the system from attacks                        |
+
+
+🎯 Simple Example Combining Both
+
+$email = $_POST['email'];
+
+// Sanitization
+$email = filter_var($email, FILTER_SANITIZE_EMAIL);
+
+// Validation
+
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    echo "Invalid Email!";
+} else {
+    echo "Valid.";
+}
+
+
+--------------------------------------------------------------
+
+Yes — both are constants in PHP:
+
+✔ FILTER_SANITIZE_EMAIL
+✔ FILTER_VALIDATE_EMAIL
+
+✅ What does “constant” mean?
+
+A constant is a value in PHP that:
+
+✔ has a fixed name
+✔ has a fixed value
+✔ cannot change while the program is running
+
+You cannot modify it like a variable.
+
+
+🧠 Simple way to remember:
+
+A variable can change → like a water bottle
+A constant stays the same → like a solid rock
+
+
+🔍 Example of a variable:
+$x = 10;
+$x = 20;   // you changed it
+
+
+🔍 Example of a constant:
+
+define("PI", 3.14);
+echo PI;
+
+
+You cannot do this:
+
+PI = 4;   // ❌ Error
+
+
+🧩 So what about PHP filter constants?
+
+FILTER_VALIDATE_EMAIL and FILTER_SANITIZE_EMAIL are predefined constants.
+
+That means PHP has already defined them for you.
+
+Example:
+
+  echo FILTER_VALIDATE_EMAIL;  // prints a number (the constant value)
+
+You cannot change their value.
+
+
+
+🎯 Why constants here?
+
+Because PHP uses them as fixed identifiers to tell filter_var() what type of task to perform.
+
+Examples:
+
+  FILTER_VALIDATE_EMAIL → “Validate this as email”
+  FILTER_SANITIZE_EMAIL → “Clean this email”
+
+These cannot change, because PHP relies on them.
+
+🧠 Summary
+
+✔ Yes — both are constants.
+✔ Constant = a value that cannot be changed.
+✔ PHP has many built-in constants for filters.
+✔ They help functions like filter_var() know what to do.
+
+If you want, I can explain how constants work internally or show more examples!
+
+
+
+
+✅ What is filter_var()?
+
+filter_var() is a built-in PHP function used to:
+
+✔ Validate data
+✔ Sanitize (clean) data
+
+It helps you check if user input is safe and correct format.
+
+🎯 Simple meaning:
+
+Think of filter_var() like a filter machine:
+You give it a value (email, number, URL, etc.)
+You tell it what type of filter to apply
+It returns either:
+  ✔ The cleaned value
+  ✔ The validated value
+  ❌ Or false if invalid
+
+🧩 Syntax
+
+filter_var(value, filter_type);
+
+
+Example:
+
+filter_var($email, FILTER_VALIDATE_EMAIL);
+
+→ Checks if $email is a valid email format.
+
+
+🚿 FILTER_SANITIZE_*
+
+Used to clean unwanted characters.
+
+Example:
+
+filter_var($email, FILTER_SANITIZE_EMAIL);
+
+→ Removes illegal characters from email.
+
+
+✔ FILTER_VALIDATE_*
+
+Used to check format.
+
+Example:
+
+  filter_var($email, FILTER_VALIDATE_EMAIL);
+
+→ Returns email if valid, or false if invalid.
+
+
+🔍 Examples
+
+1️⃣ Validate an email:
+filter_var("test@gmail.com", FILTER_VALIDATE_EMAIL);
+
+✔ Returns: "test@gmail.com"
+❌ Returns: false for invalid email.
+
+
+2️⃣ Sanitize an email:
+filter_var("raj!!@gmail.com", FILTER_SANITIZE_EMAIL);
+
+✔ Returns: "raj@gmail.com"
+(it cleans the bad characters)
+
+
+3️⃣ Validate an integer:
+
+filter_var(100, FILTER_VALIDATE_INT);
+
+
+🧠 Summary
+
+filter_var() = PHP's function to filter, clean, or validate data.
+
+| Purpose  | Example                 | Meaning               |
+| -------- | ----------------------- | --------------------- |
+| Validate | FILTER_VALIDATE_EMAIL   | Checks if valid email |
+| Sanitize | FILTER_SANITIZE_EMAIL   | Cleans email          |
+
+      `
+    },
+    {
+      id: 34,
+      question: "34. Explain Sessions with example.",
+      answer: "",
+      codeExample: `
+✅ What is a Session in PHP?
+
+A Session is used to store data for a user temporarily (until the browser is closed).
+
+
+✔ Simple Words:
+
+A session is like a temporary bag given to a user when they visit a website.
+You can store values in this bag (like username, user ID) and use them on any page.
+
+
+✅ Why do we need Sessions?
+
+To remember a user across multiple pages
+Used for login system
+Used for shopping cart
+Used to store data temporarily during browsing
+
+
+✅ How Sessions Work? (Simple)
+
+1. session_start() creates a session.
+2. PHP gives a unique Session ID to the user.
+3. You can store data in $_SESSION[].
+4. You can access this data on any page.
+5. When browser closes → session deletes.
+
+
+
+✅ PHP Session Example (Easy & Short)
+
+Page 1: store_session.php
+
+<?php
+session_start();  // Start session
+
+$_SESSION['username'] = "Raj";  // Store data
+echo "Session data stored!";
+?>
+
+
+
+Page 2: get_session.php
+
+<?php
+session_start();  // Continue same session
+
+echo "Welcome, " . $_SESSION['username'];
+?>
+
+
+Output:
+
+Welcome, Raj
+
+
+🚫 Destroy Session (Logout)
+
+<?php
+session_start();
+session_destroy();
+echo "Session ended!";
+?>
+
+
+⭐ Summary (Easy Words)
+
+Session = Temporary storage for each user.
+Data stays until the user closes the browser or you destroy it.
+Used in login, cart, user tracking.
+      `
+    },
+    {
+      id: 35,
+      question: "35. Explain Cookies with example.",
+      answer: "",
+      codeExample: `
+🍪 What Are Cookies?
+
+A Cookie is a small piece of data stored in the user's browser.
+
+✔ Simple Words:
+
+A cookie is like a small note saved in your browser.
+Websites use this note to remember you next time you visit.
+
+
+⭐ Why are Cookies used?
+
+To remember username
+To remember preferences (theme, language)
+To keep users logged in
+To track user activity
+
+
+🕒 Cookie Life
+
+Cookies can stay:
+
+  For minutes
+  For days
+  For months
+  Even after closing the browser
+
+(depends on expiry time)
+
+
+
+🍪 PHP Cookie Example (Easy & Short)
+
+✔ Set a Cookie
+
+<?php
+setcookie("username", "Raj", time() + 3600);  
+// cookie expires in 1 hour
+
+echo "Cookie set!";
+?>
+
+
+✔ Get (Read) a Cookie
+
+<?php
+echo "Hello, " . $_COOKIE['username'];
+?>
+
+
+Output:
+
+Hello, Raj
+
+
+✔ Delete a Cookie
+
+<?php
+setcookie("username", "", time() - 3600);  
+echo "Cookie deleted!";
+?>
+      
+      `
+    },  
+    {
+      id: 36,
+      question: "36. Difference between Session and Cookie.",
+      answer: "",
+      codeExample: `
+✅ Difference Between Session and Cookie
+
+| Session                                         | Cookie                                                |
+| ------------------------------------------------| ----------------------------------------------------- |
+| Stores data on the server                       | Stores data in the client (browser)                   |
+| More secure because data is not visible to user | Less secure because data is stored on user's computer |
+| Data is lost when browser is closed             | Data can remain for hours/days/months                 |
+| Can store large data                            | Can store very small data (4KB)                       |
+| Slower compared to cookies                      | Faster because browser accesses data directly         |
+| Used for login, cart, sensitive data            | Used for remember-me, preferences, tracking           |
+| Needs session_start()                           | Needs setcookie()                                     |
+| Identified using Session ID                     | Identified using Cookie name                          |
+
+
+      
+      `
+    },
+    {
+      id: 37,
+      question: "37. Explain error reporting in PHP.",
+      answer: "",
+      codeExample: `
+✅ What is Error Reporting in PHP?
+
+Error reporting in PHP means showing or hiding errors that happen in a PHP script.
+It helps developers find mistakes while writing code.
+
+PHP errors include:
+
+  Syntax errors
+  Runtime errors
+  Warnings
+  Notices
+
+
+
+⭐ Why is Error Reporting Needed?
+
+To debug your program
+To find mistakes quickly
+To avoid showing errors to users on a live website
+To maintain security (hide sensitive error info)
+
+
+🔧 How to Enable and Disable Error Reporting
+
+✔ Enable all errors
+
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+?>
+
+✔ Hide all errors
+
+<?php
+error_reporting(0);
+?>
+
+
+📝 Common Error Levels
+
+| Error Level   | Meaning                                      |
+| ------------- | -------------------------------------------- |
+| E_ERROR       | Serious errors (script stops)                |
+| E_WARNING     | Warning (script continues)                   |
+| E_NOTICE      | Minor mistakes (possible undefined variable) |
+| E_ALL         | Shows all errors                             |
+
+
+
+⭐ Example of Error Reporting
+
+<?php
+error_reporting(E_ALL);      // Show all errors
+ini_set("display_errors", 1);
+
+echo $name; // Notice: variable not defined
+?>
+
+
+Output:
+
+Notice: Undefined variable: name
+
+
+📌 Summary (Easy Words)
+
+Error reporting helps you see and fix errors.
+error_reporting() controls which errors are shown.
+display_errors decides whether errors are shown on screen.
+In development → Enable errors.
+In live website → Disable errors.
+
+
+display_errors is a PHP configuration directive (a setting), not a keyword.
+      
+      `
+    },
+    {
+      id: 38,
+      question: "38. Explain custom error handler.",
+      answer: "",
+      codeExample: `
+✅ What is a Custom Error Handler in PHP?
+
+A custom error handler allows you to create your own function to handle errors instead of PHP’s default 
+error messages.
+
+✔ You decide how the error should be displayed
+✔ You can log errors, show friendly messages, or hide sensitive details
+
+
+⭐ Why use a Custom Error Handler?
+
+To show user-friendly errors
+To hide PHP’s internal messages (for security)
+To log errors to a file
+To create custom error formats
+To handle different types of errors differently
+
+
+🔧 How to Create a Custom Error Handler
+
+Step 1: Create your own function
+Step 2: Tell PHP to use it using set_error_handler()
+
+✅ Simple Custom Error Handler Example
+
+<?php
+
+// Step 1: Custom error handling function
+function myErrorHandler($error_no, $error_msg) {
+    echo "Oops! Something went wrong. <br>";
+    echo "Error Details: [$error_no] $error_msg";
+}
+
+// Step 2: Set this function as error handler
+set_error_handler("myErrorHandler");
+
+// Step 3: Create an error
+echo $x;  // $x is not defined → triggers custom handler
+?>
+
+
+⭐ Output
+
+Oops! Something went wrong.
+Error Details: [8] Undefined variable: x
+
+
+🔥 What happened here?
+
+echo $x; created a Notice error
+PHP sent the error to your function (myErrorHandler)
+Your custom message was displayed instead of PHP's default error
+
+
+📝 Key Points (Easy Words)
+
+set_error_handler() replaces PHP’s normal error display
+
+Custom handler function receives:
+  Error number
+  Error message
+
+
+You can:
+  Show friendly messages
+  Log errors to file
+  Ignore small errors
+  Stop script if error is serious
+      
+      `
+    },
+    {
+      id: 39,
+      question: "39. Explain try–catch with example.",
+      answer: "",
+      codeExample: `
+✅ What is try–catch in PHP?
+
+try–catch is used to handle exceptions (runtime errors) in PHP.
+
+✔ Code that may cause an error → write inside try
+✔ If an error happens → catch block runs
+✔ This prevents the program from crashing
+
+
+⭐ Why use try–catch?
+
+To stop the program from breaking
+To show a user-friendly message
+To handle errors safely
+To write clean, controlled code
+
+
+🔧 Syntax
+
+try {
+    // risky code
+}
+catch (Exception $e) {
+    // what to do if error comes
+}
+
+
+✅ Easy Example
+
+<?php
+
+try {
+    $num = 10;
+    if ($num == 0) {
+        throw new Exception("Number cannot be zero!");
+    }
+
+    echo 100 / $num;  // safe
+}
+catch (Exception $e) {
+    echo "Error: " . $e->getMessage();
+}
+
+?>
+
+
+⭐ Output
+10
+
+
+If $num = 0, output becomes:
+
+  Error: Number cannot be zero!
+
+
+✔ Explanation in simple words
+
+try → Check code that may fail
+throw new Exception() → Create a custom error
+catch → Receives the error and handles it
+$e->getMessage() → Shows the error message
+      
+
+------------------------------------------------------------------------------
+
+
+✅ Full Code
+<?php
+
+try {
+    $num = 10;
+    if ($num == 0) {
+        throw new Exception("Number cannot be zero!");
+    }
+
+    echo 100 / $num;  // safe
+}
+catch (Exception $e) {
+    echo "Error: " . $e->getMessage();
+}
+
+?>
+
+
+🔍 Step-by-Step Explanation
+1. try { ... }
+
+try block means:
+
+  “Try to run this code.
+  If anything goes wrong, jump to the catch block.”
+
+So PHP will watch for errors/exceptions inside this block.
+
+
+2. $num = 10;
+
+You set $num to 10.
+
+
+3. if ($num == 0)
+
+You check:
+
+  “Is $num equal to 0?”
+
+If yes → something is wrong (you can’t divide by zero).
+
+
+4. throw new Exception("Number cannot be zero!");
+
+This line manually creates an error.
+
+throw means:
+  👉 Stop code inside try block
+  👉 Jump to catch block
+  👉 Send an error message
+
+new Exception("...") creates an exception object with a message.
+
+This line runs only if $num == 0.
+
+
+5. echo 100 / $num;
+
+Since $num = 10, this is safe.
+
+100 ÷ 10 = 10
+So output will be:
+
+  10
+
+If $num was 0 → exception would be thrown.
+
+
+6. catch (Exception $e) { ... }
+
+This block will run only if an exception happens.
+
+$e is the object that contains:
+
+  the error message
+  error type
+  line number, etc.
+
+Inside catch block:
+
+  echo "Error: " . $e->getMessage();
+
+
+getMessage() returns the message you wrote:
+
+  Number cannot be zero!
+
+
+📌 Example Output
+
+Case 1: $num = 10
+
+No error → prints:
+
+  10
+
+
+Case 2: $num = 0
+
+Exception → prints:
+
+  Error: Number cannot be zero!
+
+
+
+🧠 Why use try–catch?
+
+To handle errors safely without crashing the program.
+
+
+Useful for:
+
+Division by zero
+File not found
+Database errors
+API errors
+Invalid user input
+      `
+    },
+    {
+      id: 40,
+      question: "40. Explain multiple catch blocks.",
+      answer: "",
+      codeExample: `
+Multiple Catch Blocks in PHP
+
+A try–catch structure can have multiple catch blocks.
+Each catch block handles a different type of exception.
+This allows more precise control over error handling.
+
+
+Why use multiple catch blocks?
+
+  Different exceptions need different responses.
+  You can catch specific errors first, general ones last.
+  Makes debugging and error messages more accurate.
+
+
+Example: Multiple Catch Blocks
+
+<?php
+try {
+    $num = 10 / 0;  // Division by zero → Warning converted to ErrorException
+}
+catch (DivisionByZeroError $e) {
+    echo "Cannot divide by zero.<br>";
+}
+catch (Error $e) {
+    echo "General PHP Error: " . $e->getMessage() . "<br>";
+}
+catch (Exception $e) {
+    echo "Exception occurred: " . $e->getMessage();
+}
+?>
+
+
+How this works
+
+1. PHP tries the code in try{}.
+2. If division by zero occurs:
+  First catch checks for DivisionByZeroError.
+3. If not matched, it goes to next catch.
+4. Last catch handles any remaining Exception.
+
+
+Key Points
+
+  Catch blocks run in order (top to bottom).
+  Place specific exceptions first, general ones later.
+  Only one catch block runs for a given error.
+  Helps build cleaner, safer error-handling systems.
+      
+
+another example :
+catch (InvalidArgumentException $e) {
+      echo "Error: ".$e->getMessage()."\n";
+}
+      `
+    },
+    {
+      id: 41,
+      question: "41. What is AJAX?",
+      answer: "",
+      codeExample: `
+⭐ What is AJAX?
+
+AJAX (Asynchronous JavaScript and XML)
+is a technique used in web development that allows a webpage to request data from the server without 
+reloading the entire page.
+
+
+🔥 In simple words:
+
+AJAX = Update part of a webpage without refreshing it.
+
+
+⭐ Why AJAX is used?
+
+To make web pages faster and more interactive
+To load data in the background
+To submit forms without refreshing
+To update only one section (like chat message, search suggestions)
+
+
+⭐ Example (Very Simple)
+
+👉 HTML:
+
+<button onclick="loadData()">Get Message</button>
+<div id="result"></div>
+
+
+👉 JavaScript (AJAX request):
+
+function loadData() {
+  let xhr = new XMLHttpRequest();     // create request object
+  xhr.open("GET", "data.php", true);  // request file
+  xhr.onload = function() {
+    document.getElementById("result").innerHTML = xhr.responseText;
+  };
+  xhr.send();
+}
+
+
+👉 PHP (data.php):
+
+echo "Hello, this is AJAX response!";
+
+
+⭐ Result:
+
+When you click the button:
+✔ Data loads from data.php
+✔ Only the <div> updates
+✔ Page does NOT refresh
+      
+meaning of Asynchronous:
+👉 Asynchronous = Does NOT wait. Keeps running.
+------------------------------------------------------------------------------
+
+AJAX is not directly part of PHP — but PHP is used with AJAX
+✅ PHP does NOT execute AJAX
+
+  AJAX happens inside the browser, using JavaScript.
+  PHP runs on the server, not in the browser.
+
+So how do they work together?
+
+AJAX (JavaScript) sends a request to a PHP file without reloading the webpage.
+
+Simple Flow:
+
+1. User clicks button
+2. JavaScript (AJAX) sends request → getData.php
+3. PHP runs, processes request (database, logic, etc.)
+4. PHP returns result (JSON, text, HTML)
+5. AJAX receives response and updates the page dynamically.
+
+
+✔ Example: AJAX calling PHP
+HTML + JavaScript AJAX
+
+<button onclick="loadData()">Load Data</button>
+<div id="result"></div>
+
+<script>
+function loadData() {
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", "data.php", true);
+
+    xhr.onload = function() {
+        document.getElementById("result").innerHTML = xhr.responseText;
+    };
+
+    xhr.send();
+}
+</script>
+
+
+PHP file (data.php)
+
+<?php
+echo "This data is coming from PHP!";
+?>
+
+
+📌 Key Point
+
+AJAX uses JavaScript to talk to PHP.
+PHP cannot do AJAX, but it responds to AJAX.
+
+      `
+    },
+    {
+      id: 42,
+      question: "42. Explain AJAX workflow.",
+      answer: "",
+      codeExample: `
+✅ AJAX Workflow (How AJAX Works)
+
+AJAX = Asynchronous JavaScript And XML
+(It works with PHP, Node, Python, Java — any backend.)
+
+AJAX allows a webpage to send/receive data without reloading the whole page.
+
+
+🚀 AJAX Workflow – Step-by-Step
+
+1. User performs an action
+
+Example:
+
+  Clicks a button
+  Chooses from dropdown
+  Types something in search box
+
+👉 JavaScript captures this action.
+
+
+2. JavaScript creates an AJAX request
+
+JavaScript uses:
+  XMLHttpRequest
+  or fetch()
+  or jQuery $.ajax()
+This request is sent to a server-side file (PHP, etc.).
+
+
+3. AJAX sends data to the server
+
+Example:
+
+fetch("server.php?name=Raj")
+
+This sends a request behind the scenes (asynchronously).
+
+
+4. Server processes the request
+
+Backend (PHP) receives the request.
+
+Example (server.php):
+
+<?php
+$name = $_GET['name'];
+echo "Hello $name!";
+?>
+
+Server sends back a response (text, JSON, HTML, etc.).
+
+
+5. AJAX receives server response
+
+JavaScript receives the response without page reload.
+
+
+6. JavaScript updates the webpage
+
+Example:
+
+document.getElementById("result").innerHTML = response;
+
+Only a small part of the page updates → page does NOT reload.
+
+
+📌 Summary (Very Short)
+
+| Step | Explanation                        |
+| ---- | ---------------------------------- |
+| 1    | User triggers an event             |
+| 2    | JS creates AJAX request            |
+| 3    | Request sent to server (PHP)       |
+| 4    | Server processes & sends back data |
+| 5    | JS receives response               |
+| 6    | Webpage updates without reload     |
+
+
+✔ Simple Visual Diagram (Text Format)
+
+User Action
+     ↓
+JavaScript (AJAX request)
+     ↓
+Server (PHP)
+     ↓
+Response (JSON/HTML/Text)
+     ↓
+JavaScript updates webpage
+
+
+
+
+      `
+    },
+    {
+      id: 43,
+      question: "43. Write AJAX + PHP example.",
+      answer: "",
+      codeExample: `
+✅ AJAX + PHP Example
+Goal:
+
+When user clicks a button, AJAX sends data to PHP without reloading the page, and shows the result.
+
+📌 1. HTML + JavaScript (AJAX Code)
+<!DOCTYPE html>
+<html>
+<body>
+
+<input type="text" id="name" placeholder="Enter Name">
+<button onclick="sendData()">Send</button>
+
+<p id="result"></p>
+
+<script>
+function sendData() {
+    let userName = document.getElementById("name").value;
+
+    // Create AJAX object
+    let xhr = new XMLHttpRequest();
+
+    // Call PHP file
+    xhr.open("POST", "process.php", true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");   //You are telling the server how your data is formatted when you send it.
+                                                                                 //example name=Raj, key=value&key2=value2 ...
+    // When PHP sends response
+    xhr.onload = function() {
+        document.getElementById("result").innerHTML = this.responseText;
+    };
+
+    // Send data to PHP
+    xhr.send("name=" + userName);
+}
+</script>
+
+</body>
+</html>
+
+
+
+📌 2. PHP File: process.php
+<?php
+// Read data sent from AJAX
+$name = $_POST['name'];
+
+// Send response back to AJAX
+echo "Hello, " . $name;
+?>
+
+
+
+✔ How it works (short):
+
+User enters name → clicks button
+JavaScript sends data to PHP using AJAX (POST).
+PHP receives data and returns a message.
+JavaScript updates the webpage without reload.
+      
+
+------------------------------------------------------------------------------
+
+
+get method example :
+
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<input type="text" id="name" placeholder="Enter Name">
+<button onclick="sendData()">Send</button>
+
+<p id="result"></p>
+
+<script>
+function sendData() {
+    let userName = document.getElementById("name").value;
+
+    // Create AJAX object
+    let xhr = new XMLHttpRequest();
+
+    // Send data using GET (added in URL)
+    xhr.open("GET", "process.php?name=" + encodeURIComponent(userName), true);
+
+    // When PHP sends response
+    xhr.onload = function() {
+        document.getElementById("result").innerHTML = this.responseText;
+    };
+
+    // GET does NOT send body, so no xhr.send(data)
+    xhr.send();
+}
+</script>
+
+</body>
+</html>
+
+
+
+💡 PHP (process.php)
+<?php
+echo "Hello, " . $_GET['name'];
+?>
+
+
+
+| Code                                | Means                                      |
+| ----------------------------------- | ------------------------------------------ |
+| xhr.responseText                    | Directly using the variable name           |
+| this.responseText (inside onload)   | Browser automatically sets this to xhr     |
+
+
+🔍 WHY we don’t write setRequestHeader() in GET?
+
+Because:
+✔ GET sends data inside the URL
+✔ GET does not send a body
+✔ Therefore no content type is needed
+
+Only POST needs this header to describe the body format.
+
+📌 Summary
+| Method   | Where Data Goes | Need Request Header?   |
+| -------- | --------------- | -----------------------|
+| GET      | URL             | ❌ No                 |
+| POST     | Request body    | ✅ Yes                |
+
+      `
+    },
+    {
+      id: 44,
+      question: "44. Explain exception handling in detail.",
+      answer: "",
+      codeExample: `
+✅ Exception Handling in PHP (Detailed Explanation)
+
+Exception Handling is a mechanism in PHP that allows you to detect errors, handle them safely, and 
+continue program execution without crashing the script.
+
+Instead of stopping the program when an error happens, PHP throws an Exception object, and you handle it 
+using:
+
+try
+catch
+throw
+finally (optional)
+
+⭐ Why Do We Need Exception Handling?
+
+Because errors happen in real projects:
+
+  Database not connected
+  File not found
+  API request failed
+  Wrong user input
+
+Instead of showing a scary error, we can show a safe, user-friendly message.
+
+🔷 Keywords Used in Exception Handling
+
+1️⃣ try block
+
+Code that may cause an error.
+PHP watches this block.
+
+try {
+    // risky code
+}
+
+
+2️⃣ catch block
+
+Runs only if an exception occurs.
+Receives the exception object.
+
+catch (Exception $e) {
+    echo $e->getMessage();
+}
+
+
+3️⃣ throw
+
+Used to manually create (throw) an exception.
+throw new Exception("Something went wrong");
+
+
+4️⃣ finally (optional)
+
+Always runs — error or no error.
+Used for cleanup (closing DB, files, etc.)
+
+finally {
+    echo "Done!";
+}
+
+
+✅ Simple Example of Exception Handling
+
+<?php
+try {
+    $num = 0;
+
+    if ($num === 0) {
+        throw new Exception("Number cannot be zero!");
+    }
+
+    echo 10 / $num;
+}
+
+catch (Exception $e) {
+    echo "Error: " . $e->getMessage();
+}
+
+finally {
+    echo " — Process Finished";
+}
+?>
+
+
+Output:
+
+Error: Number cannot be zero! — Process Finished
+
+
+📌 finally runs even when an error happens.
+
+⭐ How It Works (Simple Explanation)
+      
+| Part      | Meaning                                  |
+| --------- | ---------------------------------------- |
+| try       | Code that might break                    |
+| throw     | When error happens, throw exception      |
+| catch     | Catches exception and shows safe message |
+| finally   | Always runs at the end                   |
+
+      `
+    },
+    {
+      id: 45,
+      question: "45. How to avoid errors in PHP?",
+      answer: "",
+      codeExample: `
+✅ How to Avoid Errors in PHP
+
+Avoiding errors in PHP means writing clean, safe, and predictable code. Below are the best methods:
+
+
+1. Use Proper Error Reporting (During Development)
+
+Enable errors while developing so you can find mistakes early.
+
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
+
+Why?
+You can quickly see undefined variables, wrong function names, missing semicolons, etc.
+
+
+2. Turn Off Error Display in Production
+
+On live servers, errors should not be shown to users.
+
+ini_set("display_errors", 0);
+
+Why?
+Showing errors can reveal sensitive information (file paths, queries, etc.).
+
+
+3. Always Use try–catch Blocks
+
+Wrap risky code inside try–catch to prevent the script from crashing.
+
+try {
+    $num = 10 / 0;
+} catch (Exception $e) {
+    echo "Error: " . $e->getMessage();
+}
+
+
+4. Validate User Input
+
+Always check if the input is correct before using it.
+
+Example:
+
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    echo "Invalid email!";
+}
+
+
+Why?
+Avoids type errors, SQL errors, unexpected null values, etc.
+
+
+5. Sanitize User Input
+
+Remove dangerous characters before using input.
+
+$name = filter_var($name, FILTER_SANITIZE_STRING);
+
+Why?
+Prevents HTML/JS and SQL injection issues.
+
+
+6. Use isset() and empty() Before Accessing Variables
+
+Avoid “undefined index” or “undefined variable” errors.
+
+if (isset($_POST['name'])) {
+    echo $_POST['name'];
+}
+
+
+7. Use file_exists() Before Reading Files
+if (file_exists("data.txt")) {
+    $content = file_get_contents("data.txt");
+}
+
+
+Why?
+Prevents file-not-found errors.
+
+
+8. Use Prepared Statements for Database Queries
+
+Avoid SQL errors and injections.
+
+$stmt = $conn->prepare("SELECT * FROM users WHERE email=?");
+$stmt->bind_param("s", $email);
+$stmt->execute();
+
+
+9. Check Database Connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+
+10. Write Comments and Keep Code Clean
+
+Helps avoid logical mistakes and confusion.
+
+
+11. Use Version Control (Git)
+
+You can recover from mistakes and avoid breaking the project.
+
+
+12. Test Your Code Regularly
+
+Run small pieces frequently to avoid big failures later.
+
+
+✅ Simple Summary
+
+| Method              | Why it Avoids Errors          |
+| ------------------- | ----------------------------- |
+| Error reporting on  | Detect mistakes early         |
+| try–catch           | Prevent crashes               |
+| Validate input      | Avoid wrong data              |
+| Sanitize input      | Avoid unsafe data             |
+| Check variables     | Avoid undefined index errors  |
+| Prepared statements | Avoid SQL errors              |
+| Check file/database | Avoid missing resource errors |
+
+      `
+    },
+    {
+      id: 51,
+      question: "51. Explain Classes & Objects with example.",
+      answer: "",
+      codeExample: `
+Classes & Objects in PHP
+
+Class
+
+A class is a blueprint/template.
+It defines properties (variables) and methods (functions).
+It does NOT take memory until an object is created.
+
+
+Object
+
+An object is created from a class.
+It actually stores data and can use class functions.
+You can create many objects from one class.
+
+
+Simple Example
+Step-by-step:
+
+1. Create a Class
+
+<?php
+class Car {
+    public $model;      // property
+    public $color;      // property
+
+    public function startEngine() {   // method
+        return "Engine Started!";
+    }
+}
+?>
+
+
+2. Create an Object
+
+<?php
+$myCar = new Car();  // object
+
+$myCar->model = "BMW";  
+$myCar->color = "Black";
+
+echo $myCar->startEngine();  // calling method
+?>
+
+
+Output:
+Engine Started!
+
+
+Explanation in Easy Words
+
+| Term           | Meaning                              |
+| -------------- | ------------------------------------ |
+| Class          | Blueprint (design) of something.     |
+| Object         | Actual item made from the blueprint. |
+| Properties     | Data/variables inside the class.     |
+| Methods        | Functions inside the class.          |
+| new            | Used to create object from class.    |
+
+
+Real-Life Analogy
+
+  Class = Mobile Phone Design
+  Object = Actual Mobile Phone you use
+  Many phones can be created from one design → same like many objects from one class.
+      
+      `
+    },
+    {
+      id: 52,
+      question: "52. Explain Methods in OOP with example.",
+      answer: "",
+      codeExample: `
+✅ Methods in OOP (PHP)
+
+Methods are functions written inside a class.
+They define the behavior / actions of an object.
+
+A class = blueprint
+An object = real thing created from class
+A method = function that object can perform
+
+✅ Simple Example
+Class with Method
+
+<?php
+class Car {
+
+    // Method
+    function startEngine() {
+        echo "Engine started!";
+    }
+}
+
+// Create object
+$myCar = new Car();
+
+// Call method
+$myCar->startEngine();
+?>
+
+
+Output
+Engine started!
+
+
+📝 Explanation
+
+class Car → blueprint of car
+function startEngine() → method written inside class
+$myCar = new Car() → object created
+$myCar->startEngine() → calling the method using object
+
+
+
+✅ Methods with Parameters Example
+
+<?php
+class Calculator {
+
+    // Method with parameters
+    function add($a, $b) {
+        return $a + $b;   // returns sum
+    }
+}
+
+$obj = new Calculator();
+
+echo $obj->add(10, 20);  // passing values
+?>
+
+
+Output
+30
+
+
+⭐ Methods Key Points
+
+| Feature              | Explanation                          |
+| -------------------- | ------------------------------------ |
+| Defined inside class | Methods are functions within a class |
+| Called by object     | $object->methodName()                |
+| Can take parameters  | Input values to method               |
+| Can return output    | return statement                     |
+| Represent behavior   | What the object can do               |
+
+      
+      `
+    },
+    {
+      id: 53,
+      question: "53. What is Inheritance? Explain with example.",
+      answer: "",
+      codeExample: `
+✅ What is Inheritance? (Simple Explanation)
+
+Inheritance allows one class (child) to use the properties and methods of another class (parent).
+
+👉 It helps to reuse code and reduce duplication.
+
+
+Example in real life:
+
+  A Car is a Vehicle (Child → Parent).
+  Car inherits features like engine, wheels, speed.
+
+
+✅ Simple PHP Inheritance Example
+
+
+Parent Class (Animal.php)
+
+<?php
+class Animal {
+    public $name;
+
+    function eat() {
+        echo "Animal is eating<br>";
+    }
+}
+?>
+
+
+
+Child Class (Dog.php)
+
+<?php
+class Dog extends Animal {
+
+    function bark() {
+        echo "Dog is barking<br>";
+    }
+}
+?>
+
+
+
+Main File (index.php)
+
+<?php
+require 'Animal.php';
+require 'Dog.php';
+
+$dog = new Dog();
+$dog->name = "Tommy";
+
+echo $dog->name . "<br>";
+$dog->eat();   // From parent class
+$dog->bark();  // From child class
+?>
+
+
+
+✔ Parent functions reused
+✔ Child has extra features
+✔ Classes written in separate PHP tags
+
+
+
+✅ Types of Inheritance in PHP
+
+PHP supports these:
+
+
+1. Single Inheritance
+
+✔ One parent → One child
+
+A → B
+
+Example:
+
+Animal → Dog
+
+
+2. Multilevel Inheritance
+
+✔ Child → becomes parent of another child
+
+A → B → C
+
+Example:
+
+Animal → Dog → BabyDog
+
+
+3. Hierarchical Inheritance
+
+✔ One parent → multiple children
+
+    A
+   / \\
+  B   C
+
+
+Example:
+
+Vehicle → Car, Bike
+
+
+
+❌ PHP does NOT support Multiple Inheritance
+
+(One child extending multiple parents)
+
+A + B → C  (NOT allowed in PHP)
+
+But you can use Traits to achieve this behavior.
+      
+      
+      `
+    },
+    {
+      id: 54,
+      question: "54. Write example of Constructor & Destructor.",
+      answer: "",
+      codeExample: `
+✅ Constructor & Destructor in PHP (Simple Explanation)
+Constructor
+
+Special method that runs automatically when object is created.
+Used for initialization (ex: assign default values).
+
+
+Destructor
+
+Special method that runs automatically when object is destroyed.
+Used for cleanup (ex: closing file, database connection).
+
+
+
+✅ Simple PHP Example
+
+✔ Constructor Example
+
+<?php
+class Student {
+    public $name;
+
+    // Constructor
+    function __construct($studentName) {
+        $this->name = $studentName;
+        echo "Constructor Called: Student name is $this->name<br>";
+    }
+}
+
+// Create object
+$stu1 = new Student("Raj");
+?>
+
+
+Output
+Constructor Called: Student name is Raj
+
+
+
+✔ Destructor Example
+
+<?php
+class Demo {
+    // Destructor
+    function __destruct() {
+        echo "Destructor Called: Object Deleted";
+    }
+}
+
+// Create object
+$obj = new Demo();
+
+// When script ends, destructor automatically runs
+?>
+
+
+Output
+Destructor Called: Object Deleted
+
+
+
+💡 Constructor + Destructor Together
+
+<?php
+class Person {
+    public $name;
+
+    function __construct($n) {
+        $this->name = $n;
+        echo "Hello $this->name, object created!<br>";
+    }
+
+    function __destruct() {
+        echo "Goodbye $this->name, object destroyed!";
+    }
+}
+
+$p = new Person("Mohan");
+?>
+
+
+Output
+
+Hello Mohan, object created!
+Goodbye Mohan, object destroyed!
+
+
+🎯 Key Points   
+
+| Constructor                               | Destructor                          |
+| ----------------------------------------- | ----------------------------------- |
+| Runs automatically when object is created | Runs automatically when script ends |
+| Used for setup                            | Used for cleanup                    |
+| __construct()                             | __destruct()                        |
+| Can accept parameters                     | Cannot accept parameters            |
+
+      `
+    },
+    {
+      id: 55,
+      question: "55. What is Self keyword? What is Parent keyword?",
+      answer: "",
+      codeExample: `
+✅ What is self Keyword in PHP?
+
+self = used to access class’s own properties and methods.
+
+Used inside the same class.
+Works with static properties/methods.
+Used with :: (scope resolution operator).
+
+
+⭐ Example of self
+
+<?php
+class Test {
+    public static $name = "Raj";
+
+    public static function showName() {
+        echo self::$name; // accessing same class static property
+    }
+}
+
+Test::showName();
+?>
+
+
+✔ Output:
+Raj
+
+
+
+✅ What is parent Keyword in PHP?
+
+parent = used to access methods or properties of the parent (base) class.
+
+Used in inheritance.
+Used when child wants to use parent class methods.
+Used with :: (scope resolution operator).
+
+
+⭐ Example of parent
+
+<?php
+class A {
+    public function message() {
+        echo "Message from Parent Class A";
+    }
+}
+
+class B extends A {
+    public function show() {
+        parent::message(); // calling parent class method
+    }
+}
+
+$obj = new B();
+$obj->show();
+?>
+
+
+✔ Output:
+
+Message from Parent Class A
+
+
+🔍 Quick Difference: self vs parent
+
+| Keyword      | Used For                                     | Meaning          |
+| ------------ | -------------------------------------------- | ---------------- |
+| self::       | Access class’s own static methods/properties | “Use same class” |
+| parent::     | Access parent class methods/properties       | “Use base class” |
+
+
+
+----------------------------------------------------------------------------------
+
+
+What is static keyword in PHP?
+
+The static keyword is used to create properties (variables) and methods (functions) in a class that belong 
+to the class itself, not to any object.
+
+✔ You can access static members without creating an object
+✔ Static properties keep their value between function calls
+✔ Static methods cannot use $this (because they don’t work with objects)
+
+
+1. Static Property Example
+
+Static property = shared by all objects.
+
+<?php
+
+class Counter {
+    public static $count = 0;  // static property
+
+    public function increase() {
+        self::$count++;  // accessing static property
+    }
+}
+
+$obj1 = new Counter();
+$obj1->increase();
+
+$obj2 = new Counter();
+$obj2->increase();
+
+echo Counter::$count; // Output: 2
+?>
+
+
+Why result is 2?
+
+Because static $count is shared—both objects increase the same value.
+
+
+2. Static Method Example
+
+Static method = call directly using class name.
+
+<?php
+
+class MathTool {
+    public static function add($a, $b) {
+        return $a + $b;
+    }
+}
+
+echo MathTool::add(5, 3); // Output: 8
+?>
+
+
+✔ No need to create an object
+✔ Works directly with class
+
+
+3. Static inside a function
+
+Static variables remember their value even after function ends.
+
+<?php
+
+function test() {
+    static $x = 0;
+    $x++;
+    echo $x . "<br>";
+}
+
+test(); // 1
+test(); // 2
+test(); // 3
+?>
+
+
+When to use static?
+
+Use static when:
+  You want a value shared across all objects
+  You want to call a method without creating an object
+  You have helper/utility functions (like Math functions)
+  You need counters or logs
+
+
+Important Rules
+
+✓ Access static items with
+self::$variable
+self::method()
+
+✓ Cannot use $this inside static methods
+(because $this is for objects, but static is for class)
+      
+      `
+    },
+    {
+      id: 56,
+      question: "56. Explain Object Cloning with example.",
+      answer: "",
+      codeExample: `
+⭐ Object Cloning in PHP
+
+Object Cloning means creating a copy of an existing object.
+
+In PHP, we clone an object using the keyword:
+
+
+clone
+
+
+When you clone:
+
+A new object is created.
+All properties of the old object are copied.
+Both objects become separate copies (changing one does NOT affect the other).
+
+
+✅ Simple Example
+File: obj1.php
+
+<?php
+
+class Student {
+    public $name;
+    public $course;
+}
+
+$student1 = new Student();
+$student1->name = "Raj";
+$student1->course = "BCA";
+
+$student2 = clone $student1;   // cloning
+
+$student2->name = "Amit";      // change copied object
+
+echo "Student 1: " . $student1->name . "<br>";
+echo "Student 2: " . $student2->name;
+
+?>
+
+
+🎯 Output
+
+Student 1: Raj
+Student 2: Amit
+
+
+Meaning:
+
+  Changing $student2 does not change $student1.
+  They are separate objects after cloning.
+
+
+  
+⭐ Using __clone() Method
+
+If you want some extra action during cloning (like resetting values), PHP provides the magic method:
+
+__clone()
+
+
+Example with __clone()
+
+<?php
+
+class Book {
+    public $title;
+    public $price;
+
+    public function __clone() {
+        // This runs automatically during cloning
+        $this->price = 0;  
+    }
+}
+
+$book1 = new Book();
+$book1->title = "PHP Guide";
+$book1->price = 500;
+
+$book2 = clone $book1;
+
+echo $book1->price . "<br>";  // 500
+echo $book2->price;           // 0 (reset in __clone)
+
+?>
+
+
+✔ Key Points
+
+| Feature         | Description                                  |
+| --------------- | -------------------------------------------- |
+| clone keyword   | Creates a copy of object                     |
+| __clone()       | Special method that runs during cloning      |
+| Separate memory | Cloned object changes do NOT affect original |
+| Used for        | Creating duplicate objects safely            |
+
+      
+      `
+    },
+    {
+      id: 57,
+      question: "57. Explain OOP with MySQL using database class.",
+      answer: "",
+      codeExample: `
+✅ OOP with MySQL Using Database Class (Easy Explanation)
+
+OOP with MySQL means:
+
+  We create a Database class
+  That class handles connection, insert, update, delete, select
+  Then we create an object of that class and use it anywhere.
+
+This makes code clean, reusable, and easy to manage.
+
+
+
+✅ Simple Example: Database Class in PHP
+
+📌 database.php
+<?php
+class Database {
+    private $conn;
+
+    // Constructor → Connect to MySQL
+    public function __construct($host, $user, $pass, $db) {
+        $this->conn = new mysqli($host, $user, $pass, $db);
+
+        if ($this->conn->connect_error) {
+            die("Connection Failed: " . $this->conn->connect_error);
+        }
+    }
+
+    // SELECT data
+    public function getData($sql) {
+        $result = $this->conn->query($sql);
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    // INSERT, UPDATE, DELETE
+    public function executeQuery($sql) {
+        return $this->conn->query($sql);
+    }
+
+    // Destructor → Close Database
+    public function __destruct() {
+        $this->conn->close();
+    }
+}
+?>
+
+
+
+✅ Using the Database Class
+📌 fetch_users.php
+
+<?php
+include "database.php";
+
+$db = new Database("localhost", "root", "", "testdb");
+
+$data = $db->getData("SELECT * FROM users");
+
+foreach ($data as $row) {
+    echo $row['name'] . "<br>";
+}
+?>
+
+
+
+📌 insert_user.php
+
+<?php
+include "database.php";
+
+$db = new Database("localhost", "root", "", "testdb");
+
+$sql = "INSERT INTO users (name, email) VALUES ('Raj', 'raj@gmail.com')";
+$db->executeQuery($sql);
+
+echo "User Inserted Successfully!";
+?>
+
+
+✅ Why Use OOP for Database?
+
+| Feature              | Benefit                        |
+| -------------------- | ------------------------------ |
+| Reusability          | Same class used for many pages |
+| Security             | One place to update queries    |
+| Clean Code           | Logic separated from design    |
+| Easy Maintenance     | Only one class to modify       |
+
+
+
+⭐ Summary (Very Simple)
+
+Create a Database class
+Use constructor to connect
+Use functions for select and insert/update/delete
+Use destructor to close connection
+Create an object to use database anywhere
+      
+      `
+    },
+    {
+      id: 58,
+      question: "58. Difference between Class and Object.",
+      answer: "",
+      codeExample: `
+✅ Difference between Class and Object
+    
+| Class                                              | Object                                                 |
+| ---------------------------------------------------| -------------------------------------------------------|
+| Class is a blueprint / template.                   | Object is a real instance created from a class.        |
+| It defines properties and methods.                 | It uses properties and methods of the class.           |
+| It does not occupy memory until object is created. | It occupies memory.                                    |
+| Class is like a plan of a house.                   | Object is the actual built house.                      |
+| You can create many objects from one class.        | Each object is unique but created from the same class. |
+| Class is declared using the class keyword.         | Object is created using the new keyword.               |
+| Example: class Car { }                             | Example: $c1 = new Car();                              |
+
+
+
+✅ Simple Example (Separate PHP tags as you want)
+
+Class
+
+<?php
+class Car {
+    public $brand;
+    public $color;
+
+    public function start() {
+        echo "Car is starting...";
+    }
+}
+?>
+
+
+
+Object
+
+<?php
+$myCar = new Car();        // Creating object
+$myCar->brand = "Honda";   // Access property
+$myCar->color = "Red";
+
+echo $myCar->brand;        // Output: Honda
+$myCar->start();           // Calling method
+?>
+
+
+⭐ Super Easy Explanation
+
+Class = Design / Blueprint
+Object = Real thing created from the design
+      
+      `
+    },
+    {
+      id: 59,
+      question: "59. Why OOP is used in PHP?",
+      answer: "",
+      codeExample: `
+✅ Why OOP is used in PHP?
+
+(OOP = Object-Oriented Programming)
+
+OOP is used in PHP because it makes coding cleaner, faster, reusable, and easy to manage, especially for 
+large projects.
+
+
+⭐ Main Reasons Why OOP is Used in PHP
+
+1. Reusability of Code
+
+Once you create a class, you can use it many times.
+Avoids writing the same code again.
+Example: Database class, User class, Email class.
+
+
+2. Easy to Maintain
+
+Code is organized into classes → easier to update and fix.
+You change something in one class, and it affects all objects.
+
+
+3. Better Organization
+
+Data + functions stay together inside a class.
+Makes the project look clean and structured.
+
+
+4. Security
+
+OOP gives access modifiers:
+  public
+  private
+  protected
+Helps hide important data (Encapsulation).
+
+
+5. Supports Real-World Modeling
+
+Everything can be represented as objects.
+Example: Car, Student, Product, Order.
+
+
+6. Inheritance reduces code
+
+Child classes can use parent class methods.
+Less code → faster development.
+
+
+7. Polymorphism
+
+Same function name but different behavior.
+Used in frameworks and large systems.
+
+
+8. Used in Modern PHP Frameworks
+
+All major frameworks use OOP:
+
+  Laravel
+  CodeIgniter
+  Symfony
+  WordPress (mostly)
+
+So to work professionally, OOP is required.
+
+
+⭐ Final Short Answer
+
+OOP is used in PHP because it provides code reusability, security, easy maintenance, better structure, 
+real-world modeling, inheritance, and is required for modern frameworks.
+      
+      `
+    },
+    {
+      id: 60,
+      question: "60. Explain method overriding and method overloading with example.",
+      answer: "",
+      codeExample: `
+✅ Method Overriding (Supported in PHP)
+
+Definition:
+When a child class redefines a method of the parent class, using the same name and same parameters.
+
+👉 Used in Inheritance
+👉 Runtime Polymorphism
+
+
+✔ Example of Method Overriding
+
+File: ParentClass.php
+
+<?php
+class ParentClass {
+    public function showMessage() {
+        echo "Message from Parent Class";
+    }
+}
+?>
+
+
+File: ChildClass.php
+
+<?php
+class ChildClass extends ParentClass {
+    // Overriding parent method
+    public function showMessage() {
+        echo "Message from Child Class";
+    }
+}
+?>
+
+
+File: test.php
+
+<?php
+include "ParentClass.php";
+include "ChildClass.php";
+
+$obj = new ChildClass();
+$obj->showMessage();   // Output: Message from Child Class
+?>
+
+
+✔ Child method replaces Parent method.
+
+
+
+❌ Method Overloading (NOT supported like Java)
+
+PHP does NOT support method overloading by same method name with different parameters.
+
+BUT
+PHP supports overloading using Magic Methods:
+
+__call() → for calling missing methods
+__callStatic() → for missing static methods
+
+
+✔ PHP Method Overloading Example (Using __call)
+
+File: Test.php
+
+<?php
+class Student {
+    // Overloading using magic method
+    public function __call($name, $arguments) {
+        echo "Method: $name | Arguments: ";
+        print_r($arguments);
+    }
+}
+?>
+
+
+File: run.php
+
+<?php
+include "Test.php";
+
+$obj = new Student();
+
+$obj->details("Raj");  
+$obj->details("Raj", 21);  
+?>
+
+
+Output:
+
+Method: details | Arguments: Array ( [0] => Raj )
+Method: details | Arguments: Array ( [0] => Raj [1] => 21 )
+
+
+
+✔ Same method name can accept different arguments using __call()
+✔ This is PHP style method overloading.
+
+
+
+✅ Difference Table
+
+| Feature           | Method Overriding     | Method Overloading                     |
+| ----------------- | --------------------- | -------------------------------------- |
+| Supported in PHP? | ✔ Yes                 | ✔ Partially (Magic methods)           |
+| Used in           | Inheritance           | Same class                             |
+| Method name       | Same                  | Same                                   |
+| Parameters        | Same                  | Different                              |
+| Purpose           | Replace parent method | Handle different argument types/counts |
+| Binding           | Runtime               | Runtime                                |
+
+
+
+⭐ Quick Summary
+
+Overriding → Child class replaces parent class method.
+Overloading → Same method name with different arguments (via __call).  
+
+
+
+------------------------------------------------------------------------------
+
+
+✅ What is __call()?
+
+__call() is a magic method in PHP.
+
+✔ It runs automatically
+✔ When you try to call a non-existing method on an object.
+
+
+Syntax
+
+public function __call($methodName, $arguments) { }
+
+
+Simple Example
+
+<?php
+class Test {
+    public function __call($method, $args) {
+        echo "Method '$method' does not exist!<br>";
+        print_r($args);
+    }
+}
+
+$obj = new Test();
+$obj->hello("Raj", 20); 
+?>
+
+
+Output
+
+Method 'hello' does not exist!
+Array ( [0] => Raj [1] => 20 )
+
+
+
+✅ What is __callStatic()?
+
+__callStatic() is also a magic method, BUT:
+
+✔ Used for static method calls
+✔ Runs when a static non-existing method is called
+
+
+Syntax
+
+public static function __callStatic($methodName, $arguments) { }
+
+
+Example
+
+<?php
+class Demo {
+    public static function __callStatic($method, $args) {
+        echo "Static method '$method' not found!<br>";
+        print_r($args);
+    }
+}
+
+Demo::foo(100, 200);
+?>
+
+
+Output
+
+Static method 'foo' not found!
+Array ( [0] => 100 [1] => 200 )
+
+
+
+🔍 Difference between __call() and __callStatic()
+
+| Feature          | __call()                             | __callStatic()                             |
+| ---------------- | -------------------------------------| -------------------------------------------|
+| When it is used? | When object calls a missing method   | When class calls a missing static method   |
+| Call type        | $obj->method()                       | ClassName::method()                        |
+| Static or not?   | Works for non-static methods         | Works for static methods                   |
+| Method type      | Called on object instance            | Called on class without creating object    |
+| Example          | $obj->hello()                        | Demo::hello()                              |
+
+
+✅ What is print_r()?
+
+print_r() is a built-in PHP function used to print arrays and objects in a readable format.
+
+Example
+
+<?php
+$arr = ["Raj", 25, "PHP"];
+print_r($arr);
+?>
+
+
+Output
+
+Array ( [0] => Raj [1] => 25 [2] => PHP )
+
+Used mainly for:
+
+✔ Debugging
+✔ Checking object values
+✔ Printing array contents
+
+
+🔥 Final Summary
+
+__call()
+
+  Triggered when calling object method that doesn’t exist
+  Example: $obj->abc()
+
+
+__callStatic()
+
+  Triggered when calling static method that doesn’t exist
+  Example: Test::abc()
+
+
+print_r()
+
+  Displays arrays/objects in readable format
+  Used for debugging
+
+
+-----------------------------------------------------------------------------
+
+
+✅ Meaning of :: in PHP
+
+:: is called the Scope Resolution Operator.
+
+It is used to access:
+
+  Static methods
+  Static properties
+  Class constants
+  Class methods without creating an object
+
+In your example:
+
+  Demo::foo();
+
+You are calling a static method (or trying to).
+
+
+🧠 Why is __callStatic() executed?
+
+Because foo() does not exist in the class.
+
+
+PHP checks:
+
+
+1️⃣ Does Demo class have a static function named foo()?
+❌ No, it doesn’t.
+
+
+2️⃣ So PHP calls the magic method:
+
+public static function __callStatic($method, $args)
+
+
+🔍 So this happens:
+
+Demo::foo(100, 200);
+
+
+PHP runs:
+
+$method = "foo"
+$args = [100, 200]
+
+
+Output:
+
+Static method 'foo' not found!
+Array ( [0] => 100 [1] => 200 )
+
+
+--------------------------
+
+✅ Difference Between :: and -> (Simple Table)
+
+| Operator               | Symbol | Used For                                                | Example       | Meaning                           |
+| -----------------------| -------| --------------------------------------------------------| --------------| ----------------------------------|
+| Static Access Operator | ::     | Access static methods, static properties, and constants | Demo::test(); | Use class without creating object |
+| Object Access Operator | ->     | Access normal (non-static) methods and properties       | $obj->test(); | Requires creating an object first |
+
+
+
+📌 More Easy Explanation — Row by Row
+
+| Concept             | ::                     | ->                   |
+| ------------------- | -----------------------| ---------------------|
+| Need object?        | ❌ No object required  | ✔ Yes, needs object |
+| Used in static?     | ✔ Yes                  | ❌ No               |
+| Used in non-static? | ❌ No                  | ✔ Yes               |
+| Access type         | Class level            | Object level         |
+| Example             | Demo::hello()          | $d->hello()          |
+
+
+📘 Example to Understand Clearly
+
+Using :: (static)
+
+class Test {
+    public static function hello() {
+        echo "Static Hello!";
+    }
+}
+
+Test::hello();
+
+Using -> (object)
+class Test {
+    public function hello() {
+        echo "Object Hello!";
+    }
+}
+
+$obj = new Test();
+$obj->hello();
+      `
+    },
+    {
+      id: 51,
+      question: "51. Explain access modifiers (public/protected/private).",
+      answer: "",
+      codeExample: `
+✅ Access Modifiers in PHP (public, protected, private)
+
+Access modifiers define who can access the properties and methods of a class.
+
+1️⃣ public
+
+Accessible from anywhere
+  Inside the class
+  Outside the class
+  In child classes (inheritance)
+Most open access.
+
+✔ Example
+class Test {
+    public $name = "Raj";
+
+    public function showName() {
+        echo $this->name;
+    }
+}
+
+$obj = new Test();
+$obj->showName();      // Allowed
+echo $obj->name;       // Allowed
+
+
+
+2️⃣ protected
+
+Accessible only:
+
+  Inside the class
+  Inside child classes
+
+❌ Not accessible from outside the class
+
+✔ Example
+class A {
+    protected $value = 100;
+}
+
+class B extends A {
+    public function show() {
+        echo $this->value;   // Allowed
+    }
+}
+
+$obj = new B();
+$obj->show();             // Allowed
+echo $obj->value;         // ❌ ERROR (outside class)
+
+
+
+3️⃣ private
+
+Accessible only:
+  Inside the same class
+❌ Not accessible in child classes
+❌ Not accessible outside
+
+✔ Example
+
+class A {
+    private $secret = "Hidden";
+
+    public function showSecret() {
+        echo $this->secret;   // Allowed
+    }
+}
+
+class B extends A {
+    public function test() {
+        echo $this->secret;   // ❌ ERROR (child class cannot access private)
+    }
+}
+
+$obj = new A();
+$obj->showSecret();          // Allowed
+echo $obj->secret;           // ❌ ERROR (outside)
+
+
+
+📌 Quick Comparison Table
+
+| Modifier      | Same Class | Child Class | Outside Class |
+| ------------- | ---------- | ----------- | ------------- |
+| public        | ✔ Yes      | ✔ Yes      | ✔ Yes         |
+| protected     | ✔ Yes      | ✔ Yes      | ❌ No         |
+| private       | ✔ Yes      | ❌ No      | ❌ No         |
+
+
+🎯 Simple Real-Life Example
+
+class BankAccount {
+
+    public $name;           // anyone can see your name
+    protected $balance;     // only you + bank system
+    private $pin;           // only you (class)
+
+    public function __construct($n, $b, $p) {
+        $this->name = $n;
+        $this->balance = $b;
+        $this->pin = $p;
+    }
+
+    public function showBalance() {
+        echo "Balance: " . $this->balance;
+    }
+}
+
+$obj = new BankAccount("Raj", 5000, 1234);
+
+echo $obj->name;        // ✔ Allowed
+$obj->showBalance();    // ✔ Allowed
+
+echo $obj->balance;     // ❌ Not allowed (protected)
+echo $obj->pin;         // ❌ Not allowed (private)
+      
+
+
+-------------------------------------------------------------
+
+
+“Inside <?php ?> multiple classes are allowed? You earlier said it is not possible?”
+
+✔ Yes — multiple classes CAN exist inside one PHP file.
+✔ That is completely allowed and normal.
+
+What I said earlier was something different:
+
+
+🔥 One class cannot access another class’s private property.
+
+Not "you cannot write multiple classes in one file."
+These are two different things.
+
+Let me explain cleanly 👇
+
+✅ 1. Multiple classes inside a single PHP file → ALLOWED
+
+Example:
+
+<?php
+class A {}
+class B {}
+class C {}
+?>
+
+
+✔ 100% valid
+✔ No error
+✔ Used in many real projects
+
+
+❌ 2. Child class cannot access parent’s private property
+
+This is the rule that caused confusion.
+
+class A {
+    private $secret = "Hidden";
+}
+
+class B extends A {
+    public function test() {
+        echo $this->secret;  // ❌ ERROR (private not accessible)
+    }
+}
+
+
+So the error is because of private, not because of multiple classes.
+
+
+🎯 Why does this work?
+
+$obj = new B();
+$obj->showSecret(); // Allowed
+
+
+Because showSecret() is inside class A, where $secret is private.
+Inside the same class, private properties ARE allowed.
+
+
+🎯 Why does this give error?
+
+class B extends A {
+    public function test() {
+        echo $this->secret; // ❌ ERROR
+    }
+}
+
+
+Because child class B cannot access A’s private property.
+
+Even though both classes are inside one PHP file —
+private visibility rules still apply.
+
+
+
+✔ Final Summary (Easy)
+
+| Concept                                           | Allowed? | Reason                           |
+| ------------------------------------------------- | -------- | -------------------------------- |
+| Multiple classes in one PHP file                  | ✔ YES    | PHP supports it                  |
+| Access parent’s private property from child       | ❌ NO    | Private = only inside same class |
+| Access private property inside its own class      | ✔ YES    | That’s how private works         |
+| Access private property from outside using object | ❌ NO    | Not allowed                      |
+
+
+If you want, I can show you the difference between:
+
+private
+protected
+public
+      
+      `
+    },
+    {
+      id: 52,
+      question: "52. Write code for simple PHP class.",
+      answer: "",
+      codeExample: `
+
+      ✅ Simple PHP Class Example
+
+<?php
+
+class Car {
+    public $brand;     // property
+    public $color;     // property
+
+    // Method to set car details
+    public function setDetails($brand, $color) {
+        $this->brand = $brand;   // using $this to access object property
+        $this->color = $color;
+    }
+
+    // Method to display car details
+    public function showDetails() {
+        echo "Brand: " . $this->brand . "<br>";
+        echo "Color: " . $this->color;
+    }
+}
+
+$car1 = new Car();           // creating object
+$car1->setDetails("BMW", "Black");
+$car1->showDetails();
+
+?>
+
+
+🔍 Explanation (Easy & Simple)
+
+1. Class
+
+A blueprint/template.
+Contains properties (variables) and methods (functions).
+
+
+2. Object
+
+Created from the class.
+Has its own data.
+
+
+3. Important keywords
+
+$this → used inside class to access object properties.
+new → used to create object.
+      
+      `
+    },
     {
       id: 1,
       question: "",
       answer: "",
       codeExample: ``
-    },  
-    {
-      id: 1,
-      question: "",
-      answer: "",
-      codeExample: ``
-    },  
+    },
+
     {
       id: 1.1,
       question: "1. HTML Page Design your Profile page with following details: - Personal Details - Educational Details - Profile Picture - Link of your workspace directory",
