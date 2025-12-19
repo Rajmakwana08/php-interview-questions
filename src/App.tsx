@@ -5143,8 +5143,8 @@ $obj->hello();
       `
     },
     {
-      id: 51,
-      question: "51. Explain access modifiers (public/protected/private).",
+      id: 61,
+      question: "61. Explain access modifiers (public/protected/private).",
       answer: "",
       codeExample: `
 ✅ Access Modifiers in PHP (public, protected, private)
@@ -5364,8 +5364,8 @@ public
       `
     },
     {
-      id: 52,
-      question: "52. Write code for simple PHP class.",
+      id: 62,
+      question: "62. Write code for simple PHP class.",
       answer: "",
       codeExample: `
 
@@ -5417,6 +5417,212 @@ $this → used inside class to access object properties.
 new → used to create object.
       
       `
+    },
+    {
+      id: 63,
+      question: "63. variable like types, type casting, etc..",
+      answer: "",
+      codeExample: `
+✅ What is a Variable in PHP?
+
+A variable is used to store data (value) in a program.
+
+📌 In PHP, a variable starts with $
+
+Syntax
+$variable_name = value;
+
+Example
+$name = "Raj";
+$age = 20;
+
+
+✅ Rules for PHP Variables
+
+Must start with $
+Cannot start with a number
+Case-sensitive ($name ≠ $Name)
+Can contain letters, numbers, _
+
+
+✅ Types of Variables in PHP (Based on Scope)
+
+1️⃣ Local Variable
+
+Declared inside a function
+Used only inside that function
+
+Example
+function show() {
+    $x = 10;   // local variable
+    echo $x;
+}
+show();
+
+
+2️⃣ Global Variable
+
+Declared outside a function
+To use inside function → use global keyword
+
+Example
+$x = 20;   // global variable
+
+function test() {
+    global $x;
+    echo $x;
+}
+test();
+
+
+3️⃣ Static Variable
+
+Value is not destroyed after function ends
+
+Example
+function counter() {
+    static $count = 0;
+    $count++;
+    echo $count . "<br>";
+}
+counter();
+counter();
+counter();
+
+
+Output
+
+1
+2
+3
+
+
+
+✅ PHP Data Types (Variable Types)
+
+1️⃣ Integer
+$a = 10;
+
+2️⃣ Float (Decimal)
+$b = 10.5;
+
+3️⃣ String
+$name = "Raj";
+
+4️⃣ Boolean
+$isLogin = true;
+
+5️⃣ Array
+$colors = array("Red", "Blue", "Green");
+
+6️⃣ NULL
+$x = null;
+
+
+✅ Dynamic Typing in PHP
+
+PHP decides variable type automatically
+
+$x = 10;      // integer
+$x = "Raj";   // string
+
+
+
+
+✅ Type Casting in PHP
+
+Changing one data type to another.
+
+Syntax
+(type) variable;
+
+
+🔹 Types of Type Casting
+
+1️⃣ Integer Casting
+$x = "10";
+$y = (int)$x;
+echo $y;
+
+2️⃣ Float Casting
+$x = "10.5";
+$y = (float)$x;
+
+3️⃣ String Casting
+$x = 100;
+$y = (string)$x;
+
+4️⃣ Boolean Casting
+$x = 1;
+$y = (bool)$x;
+
+
+
+✅ Type Checking Functions
+
+| Function    | Use             |
+| ------------| --------------- |
+| is_int()    | checks integer  |
+| is_float()  | checks float    |
+| is_string() | checks string   |
+| is_bool()   | checks boolean  |
+| gettype()   | shows data type |
+
+Example
+$x = 10;
+echo gettype($x);
+
+
+Output
+integer
+
+
+
+✅ Variable Variables
+
+Variable name stored inside another variable 😄
+
+Example
+
+$name = "age";
+$$name = 20;
+echo $age;
+
+
+Output
+20
+
+
+
+✅ Constants (Difference from Variable)
+
+Value cannot change
+
+No $ sign
+
+Syntax
+define("PI", 3.14);
+echo PI;
+
+
+
+⭐ Summary (Very Easy Words)
+
+Variable = storage for data
+$ is compulsory
+PHP supports dynamic typing
+Types: int, float, string, boolean, array
+Type casting = change data type
+Scope types: local, global, static
+      
+      
+      `
+    },
+    {
+      id: 1,
+      question: "",
+      answer: "",
+      codeExample: ``
     },
     {
       id: 1,
