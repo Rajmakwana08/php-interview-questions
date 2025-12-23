@@ -6413,35 +6413,713 @@ if(isset($_POST['submit'])){
       `
     },  
     {
-      id: 1,
-      question: "",
+      id: 9.9,
+      question: "9. Menu Driven Program Write a menu driven program to perform various file operations. - Display size of file - Display Last Access, changed, modified time of file - Display details about owner and user of File - Display type of file - Delete a file - Copy a file - Traverse a directory in hierarchy - Remove a directory",
       answer: "",
-      codeExample: ``
+      codeExample: `
+<!DOCTYPE html>
+<html>
+<head>
+<title>File Operations</title>
+<style>
+body{
+    font-family:Arial;
+    text-align:center;
+    background:#f2f2f2;
+}
+form{
+    background:white;
+    width:300px;
+    margin:auto;
+    padding:15px;
+    border-radius:10px;
+}
+input,select{
+    margin:5px;
+    padding:6px;
+    width:90%;
+}
+input[type=submit]{
+    background:#007bff;
+    color:white;
+    border:none;
+}
+.result{
+    background:#e8f5e9;
+    padding:8px;
+    margin:10px;
+}
+</style>
+</head>
+<body>
+
+<h3>Menu Driven File Operations</h3>
+<form method="POST">
+  <input type="text" name="filename" placeholder="Enter File/Folder" required><br>
+  <select name="choice">
+    <option value="size">File Size</option>
+    <option value="time">File Time</option>
+    <option value="type">File Type</option>
+    <option value="delete">Delete File</option>
+    <option value="copy">Copy File</option>
+    <option value="traverse">Show Directory Files</option>
+  </select><br>
+  <input type="submit" name="ok" value="OK">
+</form>
+
+<?php
+if(isset($_POST['ok'])){
+  $f = $_POST['filename'];
+  $c = $_POST['choice'];
+  echo "<div class='result'>";
+  switch($c){
+    case "size": echo "Size: ".filesize($f)." bytes"; break;
+    case "time": echo "Modified: ".date("d-m-Y H:i:s", filemtime($f)); break;
+    case "type": echo "Type: ".filetype($f); break;
+    case "delete": echo unlink($f)?"File Deleted!":"Delete Failed!"; break;
+    case "copy": echo copy($f,"copy_".basename($f))?"File Copied!":"Copy Failed!"; break;
+    case "traverse":
+      if(is_dir($f)){
+        $files=scandir($f);
+        foreach($files as $x) if($x!="." && $x!="..") echo "$x<br>";
+      } else echo "Not a Directory!";
+      break;
+  }
+  echo "</div>";
+}
+?>
+</body>
+</html>
+
+      
+      
+      `
     },  
     {
-      id: 1,
-      question: "",
+      id: 10.10,
+      question: "10. 13. Image Manipulation Develop a web application to perform PHP image manipulation. Perform following tasks: - Load image - Resize image - Crop image - Merge (watermark) - Output image to browser with format conversion.",
       answer: "",
-      codeExample: ``
+      codeExample: `
+index.php 
+
+<!DOCTYPE html>
+<html>
+<head><title>Image Manipulation</title></head>
+<body>
+<h2>Image Manipulation</h2>
+
+<form method="POST" action="process.php" enctype="multipart/form-data">
+    <input type="file" name="img" required><br><br>
+    <input type="submit" value="Process Image">
+</form>
+
+</body>
+</html>
+
+
+
+
+process.php
+
+<?php
+ //LOAD IMAGE
+$src = $_FILES['img']['tmp_name'];
+$image = imagecreatefromjpeg($src);
+
+// Resize
+$resize = imagescale($image, 200, 200);
+
+// Crop
+$crop = imagecrop($resize, ["x"=>0,"y"=>0,"width"=>200,"height"=>200]);
+
+// Watermark
+$black = imagecolorallocate($crop, 0,0,0);
+imagestring($crop, 5, 5, 5, "MK", $black);
+
+// OUTPUT ONLY IMAGE
+header("Content-Type: image/png");
+imagepng($crop);
+
+// Clean memory
+imagedestroy($image);
+imagedestroy($resize);
+imagedestroy($crop);
+?>
+
+      
+      `
     },  
     {
-      id: 1,
-      question: "",
+      id: 11.11,
+      question: "11.11 Simple Image Gallery Write a php scipt to design a simple gallery",
       answer: "",
-      codeExample: ``
+      codeExample: `
+gallery.php
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Image Gallery</title>
+<style>
+body{font-family:Arial;text-align:center;background:#f2f2f2;}
+.gallery img{
+    width:250px;
+    height:250px;
+    object-fit:cover;
+    margin:10px;
+    border-radius:8px;
+    box-shadow:0 0 5px gray;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Simple Image Gallery (Using Array)</h2>
+
+<div class="gallery">
+<?php
+// Array of images
+$images = array(
+    "images/pic1.jpg",
+    "images/pic2.jpg",
+    "images/pic3.jpg"
+);
+
+// Display each image
+foreach($images as $img){
+    echo "<img src='$img'>";
+}
+?>
+</div>
+
+</body>
+</html>
+
+      
+      `
     },  
     {
-      id: 1,
-      question: "",
+      id: 12.12,
+      question: "12. Error and Exception Handling Develop a web application to perform Error and Exception Handling Operations. Implement proper requirements for demonstration.",
       answer: "",
-      codeExample: ``
+      codeExample: `
+<!DOCTYPE html>
+<html>
+<head>
+<title>Error & Exception Handling</title>
+<style>
+body{font-family:Arial;text-align:center;background:#f2f2f2;padding-top:30px;}
+form{background:white;width:300px;margin:auto;padding:15px;border-radius:10px;}
+input{width:90%;padding:7px;margin:8px;}
+</style>
+</head>
+<body>
+
+<h2>Error & Exception Handling</h2>
+
+<form method="POST">
+    <input type="number" name="num" placeholder="Enter a Number" required>
+    <input type="submit" name="ok" value="Check">
+</form>
+
+<?php
+
+// ---------------------------
+//  Custom Error Handler
+// ---------------------------
+function myError($no, $msg){
+    echo "<p style='color:red;'>Error: $msg</p>";
+}
+set_error_handler("myError");
+
+// ---------------------------
+//  Custom Exception Class
+// ---------------------------
+class MyException extends Exception{}
+
+// ---------------------------
+//  Main Processing
+// ---------------------------
+if(isset($_POST['ok'])){
+    
+    try{
+        $n = $_POST['num'];
+
+        // Trigger Built-in Error
+        if($n < 0){
+            trigger_error("Negative numbers not allowed!");
+        }
+
+        // Custom Exception
+        if($n == 0){
+            throw new MyException("Number cannot be Zero");
+        }
+
+        echo "<p style='color:green;'>Valid Number: $n</p>";
+    
+    } catch(MyException $e){
+        echo "<p style='color:red;'>Exception: ".$e->getMessage()."</p>";
+    }
+}
+
+?>
+
+</body>
+</html>
+
+      
+      `
     },  
     {
-      id: 1,
-      question: "",
+      id: 13.13,
+      question: "13. Dynamic Search Box using AJAX Develop a dynamic search box to find records using php and AJAX. [For Example: Google Search]",
       answer: "",
-      codeExample: ``
+      codeExample: `
+fetch.php
+
+<?php
+
+// Sample data (like Google suggestions)
+$data = array(
+    "apple", "banana", "ball", "cat", "car", 
+    "dog", "dell", "elephant", "fish", "google",
+    "grapes", "house", "horse", "icecream", "india"
+);
+
+$q = strtolower($_GET["q"]);
+$output = "";
+
+// Return matching results
+if($q != ""){
+    foreach($data as $item){
+        if(strpos(strtolower($item), $q) !== false){
+            $output .= $item . "<br>";
+        }
+    }
+}
+
+echo ($output == "") ? "No results" : $output;
+?>
+
+
+
+search.php
+<!DOCTYPE html>
+<html>
+<head>
+<title>AJAX Search</title>
+<style>
+body{font-family:Arial;text-align:center;margin-top:40px;}
+#result{margin-top:10px;font-size:18px;}
+input{padding:8px;width:250px;}
+</style>
+</head>
+<body>
+
+<h2>Dynamic Search Box (AJAX + PHP)</h2>
+
+<input type="text" id="search" placeholder="Type to search..." onkeyup="findData()">
+<div id="result"></div>
+
+<script>
+function findData(){
+    let text = document.getElementById("search").value;
+
+    let ajax = new XMLHttpRequest();
+    ajax.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            document.getElementById("result").innerHTML = this.responseText;
+        }
+    };
+    ajax.open("GET","fetch.php?q="+text,true);
+    ajax.send();
+}
+</script>
+
+</body>
+</html>
+
+      `
     },  
+    {
+      id: 14.14,
+      question: "14. Event Webpage [Object Oriented Concepts] Develop an online Event webpage. Provide admin to set font-size, color and event label for each event. Create Event class with constructor/Destructor. Use show_event() method to display eventlist.",
+      answer: "",
+      codeExample: `
+<!DOCTYPE html>
+<html>
+<head>
+<title>Event Webpage</title>
+<style>
+body{font-family:Arial;text-align:center;background:#f2f2f2;padding-top:20px;}
+form{background:white;width:320px;margin:auto;padding:15px;border-radius:10px;}
+input{margin:5px;padding:7px;width:90%;}
+input[type=submit]{background:#007bff;color:white;border:none;}
+.event-box{margin-top:20px;padding:10px;}
+</style>
+</head>
+<body>
+
+<h2>Online Event Webpage (OOP in PHP)</h2>
+
+<form method="POST">
+    <input type="text" name="label" placeholder="Event Name" required><br>
+    <input type="number" name="size" placeholder="Font Size (px)" required><br>
+    <input type="text" name="color" placeholder="Color (red/blue/#000)" required><br>
+    <input type="submit" name="add" value="Add Event">
+</form>
+
+<?php
+
+class Event{
+
+    public $label;
+    public $size;
+    public $color;
+
+    // Constructor
+    function __construct($label, $size, $color){
+        $this->label = $label;
+        $this->size = $size;
+        $this->color = $color;
+    }
+
+    // Show Event Method
+    function show_event(){
+        echo "<div class='event-box' 
+              style='font-size:$this->size" . "px; color:$this->color;'> 
+              📌 $this->label 
+              </div>";
+    }
+
+    // Destructor
+    function __destruct(){
+        // For closing messages if needed
+    }
+}
+
+if(isset($_POST['add'])){
+    $ev = new Event($_POST['label'], $_POST['size'], $_POST['color']);
+    $ev->show_event();
+}
+?>
+
+</body>
+</html>
+
+      
+      `
+    }, 
+    {
+      id: 15.15,
+      question: "15. Object Oriented PHP Web Application Printed on : 09-07-2021 04:44 PM Page 4 of 4 Create a web forum application that has a Member class for forum members containing methods such as createPost(), editProfile(), showProfile(). Create a class called Administrator that is a child of the Member class by adding extra methods such as createForum(), deleteForm() and banMember(). Override login() or logout method of parent class in child class.",
+      answer: "",
+      codeExample: `
+<!DOCTYPE html>
+<html>
+<head>
+<title>OOP Forum Application</title>
+<style>
+body{font-family:Arial;text-align:center;background:#f2f2f2;padding-top:20px;}
+.box{background:white;width:350px;margin:auto;padding:15px;border-radius:8px;box-shadow:0 0 10px gray;text-align:left;}
+</style>
+</head>
+<body>
+
+<h2>OOP Forum Application</h2>
+
+<div class="box">
+<?php
+
+# ---------------------------
+# Member Class (Parent Class)
+# ---------------------------
+class Member {
+
+    public $name;
+    public $email;
+
+    function __construct($name, $email){
+        $this->name  = $name;
+        $this->email = $email;
+    }
+
+    function login(){
+        echo "<p>$this->name logged in (Member)</p>";
+    }
+
+    function createPost($msg){
+        echo "<p>Post Created: $msg</p>";
+    }
+
+    function editProfile($newName){
+        $this->name = $newName;
+        echo "<p>Profile Updated: New Name = $this->name</p>";
+    }
+
+    function showProfile(){
+        echo "<p>Profile:<br>Name: $this->name<br>Email: $this->email</p>";
+    }
+}
+
+# --------------------------------------
+# Administrator Class (Child of Member)
+# --------------------------------------
+class Administrator extends Member {
+
+    // Method Overriding (login override)
+    function login(){
+        echo "<p>$this->name logged in as <b>Administrator</b></p>";
+    }
+
+    function createForum(){
+        echo "<p>Forum Created Successfully!</p>";
+    }
+
+    function deleteForum(){
+        echo "<p>Forum Deleted Successfully!</p>";
+    }
+
+    function banMember($user){
+        echo "<p>Member '$user' has been banned.</p>";
+    }
+}
+
+# ---------------------------
+# Object Testing / Demo
+# ---------------------------
+
+echo "<h3>Member Actions</h3>";
+$m = new Member("Raj", "raj@example.com");
+$m->login();
+$m->createPost("Hello, this is my first post!");
+$m->editProfile("Raj Makwana");
+$m->showProfile();
+
+echo "<hr>";
+
+echo "<h3>Administrator Actions</h3>";
+$admin = new Administrator("Admin", "admin@example.com");
+$admin->login();          // Overridden method
+$admin->createForum();
+$admin->deleteForum();
+$admin->banMember("Ravi");
+
+?>
+</div>
+
+</body>
+</html>
+
+
+      `
+    }, 
+    {
+      id: 16.16,
+      question: "16. PHP MySQL Database Connectivity Create a skeleton of SubjectMIS class and define and implement methods to perform following MySQL functions on stored subject details: - Select, Insert, Delete, Update, Connect, Disconnect",
+      answer: "",
+      codeExample: `
+<?php
+
+class SubjectMIS {
+
+    private $conn;
+
+    // -------------------
+    // CONNECT
+    // -------------------
+    function connect(){
+        $this->conn = mysqli_connect("localhost","root","","college");
+        if($this->conn)
+            echo "Connected<br>";
+        else
+            echo "Connection Failed<br>";
+    }
+
+    // -------------------
+    // DISCONNECT
+    // -------------------
+    function disconnect(){
+        mysqli_close($this->conn);
+        echo "Disconnected<br>";
+    }
+
+    // -------------------
+    // INSERT SUBJECT
+    // -------------------
+    function insert($name, $code){
+        $q = "INSERT INTO subject(sub_name, sub_code) VALUES('$name','$code')";
+        mysqli_query($this->conn, $q);
+        echo "Inserted: $name<br>";
+    }
+
+    // -------------------
+    // SELECT SUBJECTS
+    // -------------------
+    function select(){
+        $q = "SELECT * FROM subject";
+        $res = mysqli_query($this->conn, $q);
+
+        echo "<b>Subject List:</b><br>";
+        while($row = mysqli_fetch_assoc($res)){
+            echo $row['id']." - ".$row['sub_name']." (".$row['sub_code'].")<br>";
+        }
+    }
+
+    // -------------------
+    // UPDATE SUBJECT
+    // -------------------
+    function update($id, $name){
+        $q = "UPDATE subject SET sub_name='$name' WHERE id=$id";
+        mysqli_query($this->conn, $q);
+        echo "Updated ID $id<br>";
+    }
+
+    // -------------------
+    // DELETE SUBJECT
+    // -------------------
+    function delete($id){
+        $q = "DELETE FROM subject WHERE id=$id";
+        mysqli_query($this->conn, $q);
+        echo "Deleted ID $id<br>";
+    }
+}
+
+# -----------------------------------------
+# TESTING THE CLASS (Demo)
+# -----------------------------------------
+
+$mis = new SubjectMIS();
+
+$mis->connect();
+
+$mis->insert("Mathematics", "M101");
+$mis->insert("Physics", "P102");
+
+$mis->select();
+
+$mis->update(1, "Advanced Maths");
+
+$mis->delete(2);
+
+$mis->disconnect();
+
+?>
+
+      
+      `
+    }, 
+    {
+      id: 17.17,
+      question: "17. Cricket Application using Interface Define an interface for Cricket Game Activities. Implement this interface in a class. Write necessary class and member function definitions for a cricket player object. The program should accept details from user (player_code, name, runs, innings_played, no_of_times_out). The program should contain following menu. a) Enter details of players. b) Display average runs of a single player. c) Average runs of all players. d) Display the list of players in sorted order as per runs",
+      answer: "",
+      codeExample: `
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cricket Application</title>
+<style>
+body{font-family:Arial;text-align:center;background:#f2f2f2;padding-top:20px;}
+.box{background:white;width:450px;margin:auto;padding:15px;border-radius:8px;box-shadow:0 0 10px gray;text-align:left;}
+</style>
+</head>
+<body>
+
+<h2>Cricket Application using Interface</h2>
+
+<div class="box">
+<?php
+
+# -------------------------------------
+# 1. Interface
+# -------------------------------------
+interface CricketActivities {
+    public function avgRuns();
+    public function showPlayer();
+}
+
+# -------------------------------------
+# 2. Player Class implementing Interface
+# -------------------------------------
+class Player implements CricketActivities {
+
+    public $code, $name, $runs, $innings, $out;
+
+    function __construct($c,$n,$r,$i,$o){
+        $this->code = $c;
+        $this->name = $n;
+        $this->runs = $r;
+        $this->innings = $i;
+        $this->out = $o;
+    }
+
+    // Calculate Average Runs
+    public function avgRuns(){
+        if($this->out == 0)
+            return $this->runs;  // Not out → average = total runs
+        return $this->runs / $this->out;
+    }
+
+    // Display Player Details
+    public function showPlayer(){
+        echo "Code: $this->code, Name: $this->name, Runs: $this->runs, Avg: ".round($this->avgRuns(),2)."<br>";
+    }
+}
+
+# -------------------------------------
+# Data Storage (array of objects)
+# -------------------------------------
+$players = [];
+
+# -------------------------------------
+# Menu System (Simple Demo)
+# -------------------------------------
+
+echo "<h3>Menu:</h3>";
+echo "a) Enter Player Details<br>";
+echo "b) Average Runs of Single Player<br>";
+echo "c) Average of All Players<br>";
+echo "d) Players Sorted by Runs<br><br>";
+
+# ----------- (A) Enter Player Details ----------
+$p1 = new Player(1, "Virat", 12000, 250, 220);
+$p2 = new Player(2, "Rohit", 10000, 230, 200);
+$p3 = new Player(3, "Dhoni", 10500, 280, 180);
+
+$players = [$p1, $p2, $p3];
+
+echo "<b>(a) Player Details Entered Successfully!</b><br><br>";
+
+# ----------- (B) Avg of one player --------------
+echo "<b>(b) Average Runs of Single Player (Virat):</b><br>";
+echo $p1->avgRuns()."<br><br>";
+
+# ----------- (C) Avg of all players -------------
+echo "<b>(c) Average Runs of All Players:</b><br>";
+$total = 0;
+foreach($players as $p){
+    $total += $p->avgRuns();
+}
+echo round($total / count($players),2)."<br><br>";
+
+# ----------- (D) Sort players by runs -----------
+echo "<b>(d) Sorted Players by Runs:</b><br>";
+usort($players, function($a,$b){
+    return $b->runs - $a->runs;     // descending order
+});
+foreach($players as $p){
+    $p->showPlayer();
+}
+
+?>
+</div>
+</body>
+</html>
+
+      
+      `
+    },
     {
       id: 1,
       question: "",
